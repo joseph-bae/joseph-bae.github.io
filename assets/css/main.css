@@ -2767,6 +2767,7 @@ input, select, textarea {
 	}
 
 	.poptrox-popup {
+        -webkit-transform: translateZ(0px);
 		-moz-box-sizing: content-box;
 		-webkit-box-sizing: content-box;
 		-ms-box-sizing: content-box;
