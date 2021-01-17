@@ -2775,7 +2775,7 @@ input, select, textarea {
 		background: #fff;
 		border-radius: 0.35em;
 		box-shadow: 0 0.1em 0.15em 0 rgba(0, 0, 0, 0.15);
-		overflow-y: scroll;
+		overflow-y: auto;
         overflow-x: hidden;
 		padding-bottom: 3em;
 	}
@@ -2827,6 +2827,7 @@ input, select, textarea {
 			z-index: 1;
 		}
 
+/*
 		.poptrox-popup .nav-next,
 		.poptrox-popup .nav-previous {
 			text-decoration: none;
@@ -2888,6 +2889,7 @@ input, select, textarea {
 				content: '\f104';
 				left: 0;
 			}
+*/
 
 		.poptrox-popup .closer {
 			text-decoration: none;
