@@ -2829,6 +2829,7 @@ input, select, textarea {
 			text-align: center;
 			width: 100%;
 			z-index: 1;
+            opacity: .95;
 		}
 
 		.poptrox-popup .nav-next,
@@ -2846,6 +2847,7 @@ input, select, textarea {
 			position: absolute;
 			top: 0;
 			width: 50%;
+            z-index: 3;
 		}
 
 			.poptrox-popup .nav-next:before,
@@ -2860,6 +2862,7 @@ input, select, textarea {
 				text-transform: none !important;
 				font-family: 'Font Awesome 5 Free';
 				font-weight: 900;
+                
 			}
 
 			.poptrox-popup .nav-next:before,
@@ -2873,7 +2876,7 @@ input, select, textarea {
 				text-align: center;
 				top: 50%;
 				width: 1.5em;
-                z-index: 2;
+               
 			}
 
 		.poptrox-popup .nav-next {
