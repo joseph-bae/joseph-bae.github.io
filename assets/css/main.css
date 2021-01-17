@@ -2775,7 +2775,8 @@ input, select, textarea {
 		background: #fff;
 		border-radius: 0.35em;
 		box-shadow: 0 0.1em 0.15em 0 rgba(0, 0, 0, 0.15);
-		overflow: auto;
+		overflow-y: auto;
+        overflow-x: hidden;
 		padding-bottom: 3em;
 	}
 
@@ -2824,7 +2825,6 @@ input, select, textarea {
 			text-align: center;
 			width: 100%;
 			z-index: 1;
-            overflow: auto;
 		}
 
 		.poptrox-popup .nav-next,
