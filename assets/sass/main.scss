@@ -1190,7 +1190,7 @@ $size-header-pad: 4em;
 		background: #fff;
 		border-radius: _size(border-radius);
 		box-shadow: 0 0.1em 0.15em 0 rgba(0,0,0,0.15);
-		overflow: hidden;
+		overflow: auto;
 		padding-bottom: 3em;
 
 		.loader {
