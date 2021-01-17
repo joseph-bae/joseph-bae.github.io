@@ -2827,7 +2827,6 @@ input, select, textarea {
 			z-index: 1;
 		}
 
-/*
 		.poptrox-popup .nav-next,
 		.poptrox-popup .nav-previous {
 			text-decoration: none;
@@ -2889,7 +2888,6 @@ input, select, textarea {
 				content: '\f104';
 				left: 0;
 			}
-*/
 
 		.poptrox-popup .closer {
 			text-decoration: none;
