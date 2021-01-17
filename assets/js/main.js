@@ -44,9 +44,9 @@
 				$body.addClass('is-touch');
 
 			// Height fix (mostly for iOS).
-				window.setTimeout(function() {
-					$window.scrollTop($window.scrollTop() + 1);
-				}, 0);
+//				window.setTimeout(function() {
+//					$window.scrollTop($window.scrollTop() + 1);
+//				}, 0);
 
 		}
 
