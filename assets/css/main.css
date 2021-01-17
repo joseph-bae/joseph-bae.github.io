@@ -2816,7 +2816,9 @@ input, select, textarea {
 			}
 
 		.poptrox-popup .caption {
-			background: #fff;
+            -webkit-transform: translateZ(0px);
+
+            background: #fff;
 			bottom: 0;
 			cursor: default;
 			font-size: 0.9em;
