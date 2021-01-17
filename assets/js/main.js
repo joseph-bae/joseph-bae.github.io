@@ -106,7 +106,7 @@
 					popupLoaderText: '',
 					selector: '.work-item a.image',
 					usePopupCaption: true,
-					usePopupDefaultStyling: true,
+					usePopupDefaultStyling: false,
 					usePopupEasyClose: false,
 					usePopupNav: true,
 					windowMargin: (breakpoints.active('<=small') ? 0 : 50)
