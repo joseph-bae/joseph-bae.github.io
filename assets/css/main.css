@@ -2779,7 +2779,7 @@ input, select, textarea {
 		box-shadow: 0 0.1em 0.15em 0 rgba(0, 0, 0, 0.15);
 		overflow-y: auto!important;
         overflow-x: hidden;
-		padding-bottom: 3em;
+	
 	}
 
 		.poptrox-popup .loader {
