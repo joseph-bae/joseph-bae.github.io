@@ -2770,6 +2770,7 @@ input, select, textarea {
 		-moz-box-sizing: content-box;
 		-webkit-box-sizing: content-box;
 		-ms-box-sizing: content-box;
+        -webkit-overflow-scrolling: touch;
 		box-sizing: content-box;
 		-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 		background: #fff;
