@@ -2777,7 +2777,7 @@ input, select, textarea {
 		background: #fff;
 		border-radius: 0.35em;
 		box-shadow: 0 0.1em 0.15em 0 rgba(0, 0, 0, 0.15);
-		overflow-y: auto!important;
+		overflow-y: auto;
         overflow-x: hidden;
 	
 	}
@@ -2980,7 +2980,9 @@ input, select, textarea {
 		background-attachment: scroll;
 		background-size: auto, cover;
 	}
-
+    body.is-touch .poptrox-popup {
+        overflow: scroll!important;    
+    }
 	body.is-touch .poptrox-popup .nav-next,
 	body.is-touch .poptrox-popup .nav-previous,
 	body.is-touch .poptrox-popup .closer {
