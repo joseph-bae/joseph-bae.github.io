@@ -3,7 +3,8 @@
 <title>Joseph Bae</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+
 <link rel="stylesheet" href="assets/css/blog.css" />
 <link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
@@ -15,6 +16,14 @@
 <meta name="msapplication-config" content="images/favicon/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
 <style>
+
+body {
+  background-image: url('images/fulls/bg_blog_grad.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
 body,h1,h2,h3,h4,h5 {font-family: "D-DIN"
 </style>
 <body class="w3-light-grey">
@@ -24,7 +33,7 @@ body,h1,h2,h3,h4,h5 {font-family: "D-DIN"
     <a href="pubs.html">Publications</a>
     <!-- <a href="News.html">News</a> -->
     <a href="blog.html" class="active">Blog</a>
-    <a href="about.html">About</a> 
+    <a href="resume.html">Resume</a> 
     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
       <i class="fa fa-bars"></i>
     </a>
@@ -34,7 +43,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 <div class="w3-content" style="max-width:1400px">
 
 <!-- Header -->
-<header class="w3-container w3-center w3-padding-32"> 
+<header class="w3-container w3-opacity-min w3-light-grey w3-third w3-center w3-padding-32"> 
   <h1><b>Thoughts and Reflections</b></h1>
   <p>Welcome to <span class="w3-tag">Joseph's</span> blog</p>
 </header>
@@ -45,10 +54,10 @@ and is wrapped around the whole page content, except for the footer in this exam
 <!-- Blog entries -->
 <div class="w3-col l8 s12">
   <!-- Blog entry -->
-  <div class="w3-card-4 w3-margin w3-white">
+  <div class="filterDiv Research w3-card-4 w3-margin w3-white">
     <img src="/w3images/woods.jpg" alt="Nature" style="width:100%">
     <div class="w3-container">
-      <h3><b>TITLE HEADING</b></h3>
+      <h3><b>Research</b></h3>
       <h5>Title description, <span class="w3-opacity">April 7, 2014</span></h5>
     </div>
 
@@ -57,10 +66,10 @@ and is wrapped around the whole page content, except for the footer in this exam
         tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
       <div class="w3-row">
         <div class="w3-col m8 s12">
-          <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button></p>
+          <p><button class="w3-button w3-padding-large w3-white w3-border"><a href="posts/AI_in_Medicine.html"><b>READ MORE »</b></a></button></p>
         </div>
         <div class="w3-col m4 w3-hide-small">
-          <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-tag">0</span></span></p>
+          
         </div>
       </div>
     </div>
@@ -68,10 +77,10 @@ and is wrapped around the whole page content, except for the footer in this exam
   <hr>
 
   <!-- Blog entry -->
-  <div class="w3-card-4 w3-margin w3-white">
+  <div class="filterDiv Baseball w3-card-4 w3-margin w3-white">
   <img src="/w3images/bridge.jpg" alt="Norway" style="width:100%">
     <div class="w3-container">
-      <h3><b>BLOG ENTRY</b></h3>
+      <h3><b>Baseball</b></h3>
       <h5>Title description, <span class="w3-opacity">April 2, 2014</span></h5>
     </div>
 
@@ -83,11 +92,53 @@ and is wrapped around the whole page content, except for the footer in this exam
           <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button></p>
         </div>
         <div class="w3-col m4 w3-hide-small">
-          <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-badge">2</span></span></p>
+          
         </div>
       </div>
     </div>
   </div>
+  <hr>
+  <!-- Blog entry -->
+  <div class="filterDiv Research Baseball w3-card-4 w3-margin w3-white">
+  <img src="/w3images/bridge.jpg" alt="Norway" style="width:100%">
+    <div class="w3-container">
+      <h3><b>Test Both</b></h3>
+      <h5>Title description, <span class="w3-opacity">April 2, 2014</span></h5>
+    </div>
+
+    <div class="w3-container">
+      <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed
+        tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+      <div class="w3-row">
+        <div class="w3-col m8 s12">
+          <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button></p>
+        </div>
+        <div class="w3-col m4 w3-hide-small">
+          
+        </div>
+      </div>
+    </div>
+  </div>
+<!--     <div class="filterDiv Research w3-card-4 w3-margin w3-white">
+    <img src="/w3images/woods.jpg" alt="Nature" style="width:100%">
+    <div class="w3-container">
+      <h3><b>EXAMPLE WITH COMMENTS</b></h3>
+      <h5>Title description, <span class="w3-opacity">April 7, 2014</span></h5>
+    </div>
+
+    <div class="w3-container">
+      <p>Uncomment this for comment counter</p>
+      <div class="w3-row">
+        <div class="w3-col m8 s12">
+          <p><button class="w3-button w3-padding-large w3-white w3-border"><b>READ MORE »</b></button></p>
+        </div>
+        <div class="w3-col m4 w3-hide-small">
+          <p><span class="w3-padding-large w3-right"><b>Comments  </b> <span class="w3-tag">0</span></span></p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <hr>
 <!-- END BLOG ENTRIES -->
 </div>
 
@@ -95,17 +146,30 @@ and is wrapped around the whole page content, except for the footer in this exam
 <div class="w3-col l4">
   <!-- About Card -->
   <div class="w3-card w3-margin w3-margin-top">
-  <img src="/w3images/avatar_g.jpg" style="width:100%">
-    <div class="w3-container w3-white">
-      <h4><b>Blog</b></h4>
-      <p>Just a collection of thoughts and ideas as I go through grad school.</p>
+  <!-- <img src="images/fulls/bg_blog.jpeg" style="width:100%"> -->
+    <div class="w3-container w3-dark-grey w3-padding">
+      <h4>Blog</h4>
     </div>
-  </div><hr>
+    <div class="w3-container w3-white">
+      <!-- <h4><b>Blog</b></h4> -->
+      <p>A raw collection of thoughts and musings as I go through grad school.</p>
+          <ul class="icons">
+                        <li><a href="https://joseph-bae.medium.com/" class="icon brands fa-medium"><span class="label">Medium</span></a></li>
+                        <li><a href="https://twitter.com/_JosephBae" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="https://www.linkedin.com/in/josephhbae/" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+                        <li><a href="https://scholar.google.com/citations?hl=en&user=Eb7ntzQAAAAJ&view_op=list_works&authuser=4&gmla=AJsN-F4i6gGIDi1gs0s_Eav7XCdk3gvrA_IqLHi1KNM1caVzrIPpgeBpzGWTPApd1bb7CWexnniW7HDMHLOPfSxrfLs8jU3xrI7hqzD4qzCjF3SbEuiapLI" class="icon brands fa-google"><span class="label">GoogleScholar</span></a></li>
+            <li><a href="mailto:joseph.bae@stonybrookmedicine.edu" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+          </ul>
+    </div>
+  </div>
+  <hr>
+  
+
   
   <!-- Posts -->
   <div class="w3-card w3-margin">
-    <div class="w3-container w3-padding">
-      <h4>Recent Posts</h4>
+    <div class="w3-container w3-dark-grey w3-padding">
+      <h4>Recommended Posts</h4>
     </div>
     <ul class="w3-ul w3-hoverable w3-white">
       <li class="w3-padding-16">
@@ -123,25 +187,29 @@ and is wrapped around the whole page content, except for the footer in this exam
         <span class="w3-large">Dorum</span><br>
         <span>Ultricies congue</span>
       </li>   
-      <li class="w3-padding-16 w3-hide-medium w3-hide-small">
+<!--       <li class="w3-padding-16 w3-hide-medium w3-hide-small">
         <img src="/w3images/rock.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
         <span class="w3-large">Mingsum</span><br>
         <span>Lorem ipsum dipsum</span>
-      </li>  
+      </li> -->  
     </ul>
   </div>
   <hr> 
  
   <!-- Labels / tags -->
   <div class="w3-card w3-margin">
-    <div class="w3-container w3-padding">
+    <div class="w3-container w3-dark-grey w3-padding">
       <h4>Tags</h4>
     </div>
+    <div id="myBtnContainer">
     <div class="w3-container w3-white">
-    <p><span class="w3-tag w3-black w3-margin-bottom">Research</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Baseball</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Med School</span>
-      <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">COVID-19</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Artificial Intelligence</span> 
+    <p><button class="w3-light-grey w3-margin-bottom btn" onclick="filterSelection('Research')">Research</button> <button class="w3-light-grey w3-margin-bottom btn" onclick="filterSelection('AI')">Artificial Intelligence</button> <button class="w3-light-grey w3-margin-bottom btn" onclick="filterSelection('Baseball')">Baseball</button> <button class="w3-light-grey w3-margin-bottom btn" onclick="filterSelection('MedSchool')">Med School</button> <button class="w3-light-grey w3-margin-bottom btn" onclick="filterSelection('misc')">Miscellaneous</button> <button class="w3-light-grey w3-margin-bottom btn active" onclick="filterSelection('all')">Show All</button>
+
+
+
  
     </p>
+    </div>
     </div>
   </div>
   
@@ -155,10 +223,10 @@ and is wrapped around the whole page content, except for the footer in this exam
 </div>
 
 <!-- Footer -->
-<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a> <br />&copy; Joseph Bae 2021</p>
+<footer class="w3-container w3-black w3-center w3-margin-top">
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a> <br />&copy; Joseph Bae 2021<br />Background Photo: Eileen Zhou</p>
 
 </footer>
-
+<script src="assets/js/blog.js"></script>
 </body>
 </html>
