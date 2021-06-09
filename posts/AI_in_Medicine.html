@@ -78,11 +78,25 @@ body, html {
 
     <p>The breadth and severity of these mistakes is sometimes shocking (wrong site surgical procedures and retained surgical instruments come to mind), but even the rate at which incorrect diagnoses and treatments are delivered by physicians (estimated to be around 15% [3]) should be obvious problems for artificial intelligence to solve. For the remainder of this post I will investigate two reasons that might explain its failure to do so. </p>
 
-    <h4>Lack of Data</h4>
+    <h4>Lack of Data and Data Privacy</h4>
 
+    <p>The most obvious challenge to widespread use and adoption of artificial intelligence in medicine is the general dearth of high-quality data.
 
-    <h4>Privacy and Regulations</h4>
-  
+    There are numerous reasons for this, but among the most important is the threat of privacy breaches associated with studying private patient information. You are probably aware of the Health Insurance Portability and Accountability Act (HIPAA) under which protocols and standards have been set to safeguard personal health information. These protections are imperative for a functioning healthcare system, but also make it difficult for researchers to obtain access to patient data to perform studies. This is particularly true for those wishing to conduct research on data from multiple hospitals or institutions, something that is vital to proving the generalizability and robustness of AI techniques in medicine. Multi-institutional datasets are also critical when studying low-prevalence or novel diseases, something that was observed at the start of the COVID-19 pandemic. While ongoing research into decentralized deep learning techniques is being performed (federated learning, distributed learning, split learning, etc.) there are still few widely adopted approaches to studying data siloed at different hospitals and institutions. Publicly available, anonymized datasets are helpful, but come with their own issues including lack of clinical information, difficulty in verifying authenticity, etc. 
+
+    Privacy concerns aside, many current electronic medical record and picture and archiving systems (PACS--systems for storing medical images including x-rays and MRIs) simply were not built with high-volume data transfer and study in mind. Obtaining patient data from these systems is often a painstaking process that can sometimes make certain studies impossible.
+
+    There are certainly many other problems that compound these issues and reduce the amount and quality of data that might be available for research (non-uniform patient-handling and record-keeping procedures, resistance to data sharing in order to retain an academic monopoly, etc), but from my understanding it is ultimately access to existing data that most directly impedes progress in medical AI research. </p>
+
+    <h4>Trust and Resistance to Change</h4>
+
+    <p>In my mind, the second most important issue facing widespread use of AI in medicine is the (perhaps justified) attitude towards machine learning techniques that is prevalent in healthcare providers and administrators. Recent surveys have suggested that physicians, medical students, and healthcare administration personnel all have mixed confidence in AI as a healthcare tool [5]. My own anecdotal experiences with colleagues and mentors has revealed a fair amount of distrust as well. 
+
+    These doubts are not completely unfounded. Despite roots dating back to the 1950s, artificial intelligence is still a relative mysterious topic to many, and current techniques do not always have the interpretability and transparency that might be desired in tools used to make medical decisions (<a href="https://www.nature.com/articles/s42256-019-0048-x">see the black box of deep learning</a>). 
+
+    The above are valid reasons opposing the immediate use of AI in medical decision-making. There is perhaps some ways to go before we can truly understand the mechanism of many AI techniques in medicine, and robustness and generalizability of any potential application must be proven on patients across from a wide variety of geographic locations. However, personal reasons might also be present in the opposition to AI use in medicine. 
+
+    Like other fields, AI has the potential to replace healthcare providers in the future, at least to an extent. There are already numerous studies suggesting improved performance of AI models over physicians, particularly in the area of medical imaging (where I conduct my own research). While we might not be replacing radiologists in the immediate future, there may be some concern from a minority that advances in AI might prove deleterious to one's job prospects. In my humble opinion, this is largely unfounded and I strongly believe that AI techniques will be most commonly instituted to complement rather than supplant humans (at least at first). Nonetheless, </p>
 
 
 
