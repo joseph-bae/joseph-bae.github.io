@@ -30,6 +30,7 @@ body, html {
 
 </style>
 <body>
+    <button onclick="topFunction()" id="topBut" title="Go to top">Top</button>
 
 <!-- Links (sit on top) -->
   <div class="topnav" id="myTopnav">
@@ -63,7 +64,6 @@ body, html {
 <div class="w3-container" id="about">
 <!--       <p><button class="home-btn w3-white w3-border" style="font-size:10px"><a href="../blog.html"><b>Back to Blog Home</b></a></button></p> -->
   <div class="w3-content" style="max-width:700px">
-  
     <h3 class="w3-center "><span class="w3-tag w3-wide">WILL DOCTORS BE REPLACED BY ROBOTS?</span></h3>
     <br />
     <p>The beginnings of modern computational artificial intelligence can be traced back to the mid to late 20th century as basic machine learning algorithms and deep learning frameworks began to be developed. Even as early as the 1970s, an article in the <i>New England Journal of Medicine</i> titled "Medicine and the computer — the promise and problems of change" [1] began to predict the promise that advanced computation might have on the field of medicine.
@@ -149,3 +149,24 @@ body, html {
 
 </body>
 </html>
+<script>
+//Get the button:
+mybutton = document.getElementById("topBut");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
