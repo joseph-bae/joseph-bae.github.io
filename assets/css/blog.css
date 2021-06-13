@@ -100,6 +100,14 @@ hr.new{
 
 
 	}
+a.contentlinks{
+		text-decoration:underline;
+		text-decoration-style: dotted;
+
+}
+a.contentlinks:hover{
+	text-decoration: none;
+}
 #topBut {
   display: none; /* Hidden by default */
   position: fixed; /* Fixed/sticky position */
