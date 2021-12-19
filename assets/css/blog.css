@@ -108,6 +108,15 @@ a.contentlinks{
 a.contentlinks:hover{
 	text-decoration: none;
 }
+#textcontent a{
+
+	text-decoration:underline;
+		text-decoration-style: dotted;
+
+
+
+
+}
 #topBut {
   display: none; /* Hidden by default */
   position: fixed; /* Fixed/sticky position */
