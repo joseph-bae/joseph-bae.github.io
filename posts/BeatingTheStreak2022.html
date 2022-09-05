@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<title>Joseph Bae</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="apple-touch-icon" sizes="76x76" href="../images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../images/favicon/favicon-16x16.png">
+<link rel="manifest" href="../images/favicon/site.webmanifest">
+<link rel="mask-icon" href="../images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="../images/favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="../images/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href=../assets/css/blog.css>
+
+<style>
+body, html {
+  height: 100%;
+  font-family: "D-DIN";
+}
+
+.bgimg {
+  background-position: center;
+  background-size: cover;
+  background-image: url("../images/fulls/Bat2.png");
+  min-height: 50%;
+}
+
+</style>
+
+
+<body>
+    <button onclick="topFunction()" id="topBut" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+
+<!-- Links (sit on top) -->
+  <div class="topnav" id="myTopnav">
+    <a href="../index.html">Home</a>
+    <a href="../pubs.html">Publications</a>
+    <!-- <a href="News.html">News</a> -->
+    <a href="../blog.html">Blog</a>
+    <a href="../resume.html">Resume</a> 
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+  </div>
+
+<!-- Header with image -->
+<header class="bgimg w3-display-container " id="home">
+  <div class="w3-display-bottomleft w3-center w3-padding-large w3-hide-small">
+    <span class="w3-tag">August 11, 2022</span>
+  </div>
+  <div class="w3-display-middle w3-center">
+    <span class="w3-text-white nametext" style="font-size:50px">Beating The Streak: 2022 Update</span>
+  </div>
+  <div class="w3-display-bottomright w3-center w3-padding-large nametext">
+    <span class="w3-text-white" style="font-size:20px">Joseph Bae</span>
+  </div>
+</header>
+
+<!-- Add a background color and large text to the whole page -->
+<div class="w3-sand w3-grayscale w3-large w3-padding-large">
+
+<!-- About Container -->
+<div class="w3-container" id="about">
+<!--       <p><button class="home-btn w3-white w3-border" style="font-size:10px"><a href="../blog.html"><b>Back to Blog Home</b></a></button></p> -->
+  <div class="w3-content" style="max-width:700px" id="textcontent">
+    <h3 class="w3-center "><span class="w3-tag w3-wide">No, I'm not a millionaire yet.</span></h3>
+    <br />
+    <p>Well it's been over a year since my last blog post, but that isn't entirely unexpected. It's been a busy first year of the PhD with grant submissions, publications, and courses, and I haven't found a subject worth writing about in that time. I also have not beaten the streak and therefore am not a multi-millionaire, but that probably isn't a surprise either. Nonetheless, I'm now back with an update on my progress towards that goal, as well as some next steps and code for you to play around with if you are so inclined. 
+    </p>
+
+    <p>In my <a href="BeatingTheStreakIntro.html"> introduction post </a> I hinted at my general approach of training a machine learning (ML) model to predict which MLB batters might be most likely to get a hit on a given day. I settled on using the following variables or "features" used by the model for this prediction: </p>
+    <ul>
+      <li>Batting Average (AVG)</li>
+      <li>On Base Percentage (OBP)</li>
+      <li>Slugging Percentage (SLG)</li>
+      <li>Contact Percentage (Contact %)</li>
+      <li>Batter Playing at Home or Away (Home)</li>
+      <li>Batter vs. Pitcher Matchup Average (MatchupAverage)</li>
+      <li>Batter Batting Average in Most Recent 5 Games</li>
+      <li><a href="https://www.espn.com/mlb/stats/parkfactor/_/year/2021/sort/hitsFactor">Ballpark Hit Probabilities</a> (BallparkNumber)</li>
+      <li>Pitcher Earned Run Average (era)</li>
+      <li>Pitcher Hits per 9 Innings (h9)</li>
+      <li>Pitcher Strikeouts per 9 Innings (k9)</li>
+      <li>Batting Average Against Pitcher (avg)</li>
+    </ul>
+
+    <p>Next, came one of the most difficult parts of any machine learning project: data acquisition. In my own research and in my work on this project, gathering data has been the most painstaking and lengthy process, but it's also often the most important. I could, and maybe will, write an entire post on the issues I came across while obtaining the data for this project, but I'll hold off for now. Suffice it to say that I am currently pulling data from multiple official and fan-supported baseball statistics sources including <a href="https://baseballsavant.mlb.com/">Baseball Savant</a> and <a href="https://www.fangraphs.com/">Fangraphs</a>. There does exist a <a href="https://github.com/jldbc/pybaseball">Python package</a> for interacting with some of this (though I found it to be a bit unwieldy for my purposes). As a result, I mostly make use of the Python "requests" library to pull data from these websites as well as the <a href="https://appac.github.io/mlb-data-api-docs/">MLB API</a> (also unwieldy, but at least it's stuff that I wrote myself). </p>
+
+    <p class="w3-center" style="font-size:16px">
+    <img src="BeatingTheStreak2022Assets/CodeSnippet.png"
+    width="70%">
+    <br>
+    This single function required ~140 lines of code to work consistently.
+    </p>
+
+    <p>But let's back up a little bit. I've talked about what variables I want to look at to predict which batters will get a hit, but how exactly am I training a machine learning model? Well my initial approach was to do the following:
+    </p>
+    <ol>
+      <li>Collect these 12 pieces of information for top batters during each season from 2013 through 2021.
+      </li>
+      <li>Input each of these variables into a logistic regression model to learn parameters for each variable to predict whether a batter got a hit on a given day.
+      </li>
+      <li>Use the trained model to choose batters that are likely to get a hit for each day of the 2022 season. 
+      </li>
+    </ol> 
+    <p>The devoted baseball fan or the critical informatician might read the above and find several bones to pick with me. Some of these critiques I have probably addressed and some I have definitely not; this is an early approach and there's absolutely room for improvement (otherwise I'd be swimming in my 5.6 million dollar cash pool by now). Jokes aside, the above framework is a very naive, but still generic way that one might go about approaching the issue of predicting hits. At the moment, my model has achieved an all time high streak of just <b>18</b>, 39 short of what I need. And while that sounds pretty sub-par, it actually outperforms most other approaches: <a href="https://peterhad313.github.io/beat_the_streak_site/">here</a>, <a href="http://cs229.stanford.edu/proj2013/Goodman-BeatingTheStreak.pdf">here</a>, and <a href="https://www.baseballmusings.com/?cat=2808">here</a> (big caveat, I need to perform more testing to rigorously make this claim, but I'm pushing further testing of the model until I've fully settled on it's design.)  
+    </p>
+    <p>This post is a short one, mostly because it started as an intro to the <a href="">next post</a> which is a subject I'm a tad more interested in writing about. But first, there's one more topic I want to briefly discuss. If you go through my code, you'll see that my initial experiments trialled multiple different machine learning models. You can play around with each and see which you like most, and even I will continue to do so in the future when I really make a concerted push for the prize. However, the model I'm currently settled on makes use of <a href="https://en.wikipedia.org/wiki/Logistic_regression">"logistic regression"</a>. This is a very simple approach, especially compared with using something like a neural network, but there's a key reason for why it might be more interesting to use than more sophisticated models. That reason is the subject for my next blog post on whether interpretability in artificial intelligence matters. 
+    </p>
+    <p>Finally, I promised some code and you shall now have it. <a href="https://github.com/joseph-bae/BaeBall">Here</a> is my Github repository with the functions and notebooks I've created for this project. This project is still far from complete or fully polished, but I think what I have can still be useful for people looking to model MLB data.  
+    </p>
+  </div>
+      <p><button class="leftbut w3-button w3-white w3-border"><a href=BeatingTheStreakIntro.html><b> « Previous </b></a></button></p>
+      <p><button class="rightbut w3-button w3-white w3-border"><a href=#><b> Next » </b></a></button></p>
+
+</div>
+
+
+
+
+
+<!-- End page content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-black w3-center ">
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a><br /> &copy; <a href="../index.html">Joseph Bae 2021</a></p>
+
+</footer>
+
+
+
+</body>
+</html>
+<script>
+//Get the button:
+mybutton = document.getElementById("topBut");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
