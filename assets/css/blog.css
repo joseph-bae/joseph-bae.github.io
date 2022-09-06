@@ -21,6 +21,15 @@ hr.new{
     -1px 1px 0 black,
     1px 1px 0 black;  
 }
+.jbae-shadowtext {
+
+  
+    text-shadow:
+    -2px -2px 0 black,
+    2px -2px 0 black,
+    -2px 2px 0 black,
+    2px 2px 0 black;  
+}
 .rightbut{
 /*	object-fit: none;
 	object-position: right;
@@ -265,6 +274,9 @@ footer a:hover{
 
 
 }
+
+.jbae-topleft{position:absolute;left:3%;top:0}
+.jbae-bottomright{position:absolute;right:3%;bottom:0}
 /* W3.CSS 4.15 December 2020 by Jan Egil and Borge Refsnes */
 html{box-sizing:border-box}*,*:before,*:after{box-sizing:inherit}
 /* Extract from normalize.css by Nicolas Gallagher and Jonathan Neal git.io/normalize */

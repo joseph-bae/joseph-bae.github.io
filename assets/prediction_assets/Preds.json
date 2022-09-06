@@ -1,0 +1,25 @@
+[
+    {
+        "Date":"September 6, 2022"
+    },
+    {
+        "Name": "Paul Goldschmidt",
+        "Prob": 0.906397773077712
+    },
+    {
+        "Name": "Jose Ramirez",
+        "Prob": 0.8935879118580479
+    },
+    {
+        "Name": "Nolan Arenado",
+        "Prob": 0.8883970343735537
+    },
+    {
+        "Name": "Starling Marte",
+        "Prob": 0.8570059779857884
+    },
+    {
+        "Name": "Cedric Mullins II",
+        "Prob": 0.8563176074758505
+    }
+]
