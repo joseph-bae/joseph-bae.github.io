@@ -69,6 +69,7 @@ body, html {
   <!-- <img src="images/fulls/bg_blog.jpeg" style="width:100%"> -->
     <div class="w3-container w3-dark-grey w3-padding">
       <h4><label id="DateText">Date</label></h4>
+      <p style="font-size: 12px">Last Updated: <label id='UpdateTime'>time here</label></p>
    
       
     </div>
@@ -84,8 +85,8 @@ body, html {
     <img src="assets/prediction_assets/1__playerImage.png" alt="baseball player"
     style="width:100%">
     
-    <div class=jbae-topleft><span class="w3-text-white jbae-shadowtext" style="font-size:24px">Name</span></div>
-    <div class=jbae-bottomright><span class="w3-text-white jbae-shadowtext" style="font-size:24px">Probability</span></div>
+    <div class=jbae-topleft><span class="w3-text-white jbae-shadowtext" id="Name1" style="font-size:24px">Name</span></div>
+    <div class=jbae-bottomright><span class="w3-text-white jbae-shadowtext" id="Prob1" style="font-size:24px">Probability</span></div>
     </div>
     
 
@@ -94,8 +95,8 @@ body, html {
     <img src="assets/prediction_assets/2__playerImage.png" alt="baseball player"
     style="width:100%">
     
-    <div class=jbae-topleft><span class="w3-text-white jbae-shadowtext" style="font-size:24px">Name</span></div>
-    <div class=jbae-bottomright><span class="w3-text-white jbae-shadowtext" style="font-size:24px">Probability</span></div>
+    <div class=jbae-topleft><span class="w3-text-white jbae-shadowtext" id="Name2" style="font-size:24px">Name</span></div>
+    <div class=jbae-bottomright><span class="w3-text-white jbae-shadowtext" id="Prob2" style="font-size:24px">Probability</span></div>
     </div>
 
 <div class="w3-center w3-display-container w3-margin">
@@ -103,8 +104,8 @@ body, html {
     <img src="assets/prediction_assets/3__playerImage.png" alt="baseball player"
     style="width:100%">
     
-    <div class=jbae-topleft><span class="w3-text-white jbae-shadowtext" style="font-size:24px">Name</span></div>
-    <div class=jbae-bottomright><span class="w3-text-white jbae-shadowtext" style="font-size:24px">Probability</span></div>
+    <div class=jbae-topleft><span class="w3-text-white jbae-shadowtext" id="Name3" style="font-size:24px">Name</span></div>
+    <div class=jbae-bottomright><span class="w3-text-white jbae-shadowtext" id="Prob3" style="font-size:24px">Probability</span></div>
     </div>
 
 <div class="w3-center w3-display-container w3-margin">
@@ -112,8 +113,8 @@ body, html {
     <img src="assets/prediction_assets/4__playerImage.png" alt="baseball player"
     style="width:100%">
     
-    <div class=jbae-topleft><span class="w3-text-white jbae-shadowtext" style="font-size:24px">Name</span></div>
-    <div class=jbae-bottomright><span class="w3-text-white jbae-shadowtext" style="font-size:24px">Probability</span></div>
+    <div class=jbae-topleft><span class="w3-text-white jbae-shadowtext" id="Name4" style="font-size:24px">Name</span></div>
+    <div class=jbae-bottomright><span class="w3-text-white jbae-shadowtext" id="Prob4" style="font-size:24px">Probability</span></div>
     </div>
 
 <div class="w3-center w3-display-container w3-margin">
@@ -121,8 +122,8 @@ body, html {
     <img src="assets/prediction_assets/5__playerImage.png" alt="baseball player"
     style="width:100%">
     
-    <div class=jbae-topleft><span class="w3-text-white jbae-shadowtext" style="font-size:24px">Name</span></div>
-    <div class=jbae-bottomright><span class="w3-text-white jbae-shadowtext" style="font-size:24px">Probability</span></div>
+    <div class=jbae-topleft><span class="w3-text-white jbae-shadowtext" id="Name5" style="font-size:24px">Name</span></div>
+    <div class=jbae-bottomright><span class="w3-text-white jbae-shadowtext" id="Prob5" style="font-size:24px">Probability</span></div>
     </div>
 
 
@@ -150,12 +151,26 @@ body, html {
 </body>
 </html>
 <script>
+  // var today = new Date()
+  // var date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear()
+  // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
+  // var dateTime = date+' '+time
+
+
   var xhReq = new XMLHttpRequest()
   xhReq.open("GET",'assets/prediction_assets/Preds.json',false)
   xhReq.send(null)
   var PredData = JSON.parse(xhReq.responseText)
+  document.getElementById("UpdateTime").textContent=PredData[0].Time
   document.getElementById("DateText").textContent=PredData[0].Date
-
-
-  
+  document.getElementById("Name1").textContent=PredData[1].Name
+  document.getElementById("Prob1").textContent=PredData[1].Prob
+  document.getElementById("Name2").textContent=PredData[2].Name
+  document.getElementById("Prob2").textContent=PredData[2].Prob
+  document.getElementById("Name3").textContent=PredData[3].Name
+  document.getElementById("Prob3").textContent=PredData[3].Prob
+  document.getElementById("Name4").textContent=PredData[4].Name
+  document.getElementById("Prob4").textContent=PredData[4].Prob
+  document.getElementById("Name5").textContent=PredData[5].Name
+  document.getElementById("Prob5").textContent=PredData[5].Prob        
 </script>
