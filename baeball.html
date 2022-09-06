@@ -151,7 +151,7 @@ body, html {
 </html>
 <script>
   var xhReq = new XMLHttpRequest()
-  xhReq.open("GET",'assets\prediction_assets\Preds.json',false)
+  xhReq.open("GET",'assets/prediction_assets/Preds.json',false)
   xhReq.send(null)
   var PredData = JSON.parse(xhReq)
   document.getElementById("DateText").textContent=PredData[0].Date
