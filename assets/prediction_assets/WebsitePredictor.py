@@ -17,10 +17,10 @@ import shutil
 if __name__=='__main__':
 	day=datetime.date.today()
 	DoubleThresh=0
-	placeHolderPath='refFiles/backup.png'
+	placeHolderPath='assets/prediction_assets/refFiles/backup.png'
 	#Previously generated training data. See "train_data_generator.ipynb"
-	MatchupTrainData=pd.read_csv('refFiles/Matchup_TrainingData.csv')
-	NoMatchupTrainData=pd.read_csv('refFiles/NoMatchup_TrainingData.csv')
+	MatchupTrainData=pd.read_csv('assets/prediction_assets/refFiles/Matchup_TrainingData.csv')
+	NoMatchupTrainData=pd.read_csv('assets/prediction_assets/refFiles/NoMatchup_TrainingData.csv')
 
 
 	#Features of interest for our two models
@@ -105,9 +105,9 @@ if __name__=='__main__':
 	    BatterID=(NoMatchupTestData.loc[NoMatchupTestData['Name']==row['Players'],'BatterIDs'].values[0])
 	  currentURL=picURL.format(BatterID=BatterID)
 	  try:
-	      urllib.request.urlretrieve(currentURL, str(i+1)+'__playerImage.png')
+	      urllib.request.urlretrieve(currentURL, 'assets/prediction_assets/'+str(i+1)+'__playerImage.png')
 	  except Exception as e:
-	    shutil.copyfile(placeHolderPath,str(i+1)+'__playerImage.png')
+	    shutil.copyfile(placeHolderPath,'assets/prediction_assets/'+str(i+1)+'__playerImage.png')
 	  PlayerName=(row['Players'])
 	  Prob=(row['Probabilities'])
 	  Prob=str(np.round(Prob*100,2))+"%"  
