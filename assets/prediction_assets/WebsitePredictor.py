@@ -91,7 +91,7 @@ if __name__=='__main__':
 	urllib.request.install_opener(opener)
 	dictList=[]
 	date=datetime.datetime.now().strftime("%B %d, %Y")
-	time=datetime.datetime.now().strftime("%H:%S")
+	time=(datetime.datetime.now()-datetime.timedelta(hours=4)).strftime("%H:%S")
 	timeDict={"Date":date,"Time":time}
 	dictList.append(timeDict)
 	for i,(row_i, row) in enumerate(CombinedDF.iterrows()):
