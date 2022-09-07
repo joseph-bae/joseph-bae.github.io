@@ -32,7 +32,7 @@ jobs:
           pip install -r assets/prediction_assets/requirements.txt
           
       - name: execute predictor script
-        run: python WebsitePredictor.py
+        run: python assets/prediction_assets/WebsitePredictor.py
 
       - name: commit files
         run: |
