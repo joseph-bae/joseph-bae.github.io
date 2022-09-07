@@ -116,6 +116,6 @@ if __name__=='__main__':
 	  dictList.append(currentDict)
 	DictTuple=tuple(dictList)
 
-	with open('Preds.json', 'w') as outfile:
+	with open('assets/prediction_assets/Preds.json', 'w') as outfile:
 	    json.dump(DictTuple, outfile,indent=4)
 
