@@ -1,26 +1,26 @@
 [
     {
-        "Date": "September 10, 2022",
-        "Time": "03:18"
-    },
-    {
-        "Name": "Nathaniel Lowe",
-        "Prob": "89.59%"
-    },
-    {
-        "Name": "Alejandro Kirk",
-        "Prob": "89.25%"
+        "Date": "September 11, 2022",
+        "Time": "03:36"
     },
     {
         "Name": "Paul Goldschmidt",
-        "Prob": "89.01%"
+        "Prob": "89.45%"
     },
     {
-        "Name": "Lourdes Gurriel Jr.",
-        "Prob": "88.9%"
+        "Name": "Aaron Judge",
+        "Prob": "87.37%"
     },
     {
-        "Name": "Bo Bichette",
-        "Prob": "88.19%"
+        "Name": "Nolan Arenado",
+        "Prob": "87.14%"
+    },
+    {
+        "Name": "Ty France",
+        "Prob": "87.12%"
+    },
+    {
+        "Name": "Austin Riley",
+        "Prob": "85.81%"
     }
 ]
