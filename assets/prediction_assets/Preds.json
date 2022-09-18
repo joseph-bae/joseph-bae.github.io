@@ -1,26 +1,26 @@
 [
     {
-        "Date": "September 17, 2022",
-        "Time": "03:41"
+        "Date": "September 18, 2022",
+        "Time": "03:40"
     },
     {
         "Name": "Paul Goldschmidt",
-        "Prob": "92.8%"
+        "Prob": "92.32%"
     },
     {
-        "Name": "Jeff McNeil",
-        "Prob": "91.03%"
+        "Name": "Xander Bogaerts",
+        "Prob": "90.72%"
     },
     {
-        "Name": "Nolan Arenado",
-        "Prob": "89.16%"
+        "Name": "Rafael Devers",
+        "Prob": "89.19%"
     },
     {
-        "Name": "Pete Alonso",
-        "Prob": "88.06%"
+        "Name": "Freddie Freeman",
+        "Prob": "88.08%"
     },
     {
-        "Name": "Francisco Lindor",
-        "Prob": "87.83%"
+        "Name": "Alex Verdugo",
+        "Prob": "87.75%"
     }
 ]
