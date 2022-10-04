@@ -1,26 +1,26 @@
 [
     {
-        "Date": "October 03, 2022",
-        "Time": "03:40"
-    },
-    {
-        "Name": "Freddie Freeman",
-        "Prob": "90.98%"
-    },
-    {
-        "Name": "Shohei Ohtani",
-        "Prob": "89.22%"
+        "Date": "October 04, 2022",
+        "Time": "03:22"
     },
     {
         "Name": "Andres Gimenez",
-        "Prob": "89.11%"
+        "Prob": "88.47%"
     },
     {
-        "Name": "Taylor Ward",
-        "Prob": "88.74%"
+        "Name": "Freddie Freeman",
+        "Prob": "87.77%"
     },
     {
-        "Name": "Luis Rengifo",
-        "Prob": "88.57%"
+        "Name": "Bo Bichette",
+        "Prob": "86.36%"
+    },
+    {
+        "Name": "Luis Arraez",
+        "Prob": "86.13%"
+    },
+    {
+        "Name": "Lourdes Gurriel Jr.",
+        "Prob": "85.88%"
     }
 ]
