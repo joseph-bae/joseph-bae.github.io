@@ -1,26 +1,26 @@
 [
     {
-        "Date": "October 19, 2022",
-        "Time": "04:21"
+        "Date": "October 20, 2022",
+        "Time": "03:28"
+    },
+    {
+        "Name": "Aaron Judge",
+        "Prob": "90.07%"
     },
     {
         "Name": "Yordan Alvarez",
-        "Prob": "92.17%"
+        "Prob": "88.04%"
     },
     {
         "Name": "Jose Altuve",
-        "Prob": "90.06%"
+        "Prob": "81.8%"
     },
     {
-        "Name": "Manny Machado",
-        "Prob": "88.69%"
+        "Name": "DJ LeMahieu",
+        "Prob": "80.81%"
     },
     {
-        "Name": "Kyle Tucker",
-        "Prob": "88.13%"
-    },
-    {
-        "Name": "Alex Bregman",
-        "Prob": "87.37%"
+        "Name": "Isiah Kiner-Falefa",
+        "Prob": "80.37%"
     }
 ]
