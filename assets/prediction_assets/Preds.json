@@ -1,26 +1,26 @@
 [
     {
-        "Date": "October 21, 2022",
-        "Time": "03:44"
+        "Date": "October 22, 2022",
+        "Time": "03:48"
     },
     {
         "Name": "Manny Machado",
-        "Prob": "93.99%"
+        "Prob": "89.37%"
     },
     {
-        "Name": "Jurickson Profar",
-        "Prob": "86.73%"
+        "Name": "Yordan Alvarez",
+        "Prob": "88.49%"
+    },
+    {
+        "Name": "Jose Altuve",
+        "Prob": "84.95%"
     },
     {
         "Name": "Ha-seong Kim",
-        "Prob": "86.5%"
+        "Prob": "84.31%"
     },
     {
-        "Name": "Jake Cronenworth",
-        "Prob": "85.57%"
-    },
-    {
-        "Name": "Trent Grisham",
-        "Prob": "79.3%"
+        "Name": "Jurickson Profar",
+        "Prob": "84.25%"
     }
 ]
