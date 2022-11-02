@@ -1,26 +1,26 @@
 [
     {
-        "Date": "November 01, 2022",
-        "Time": "03:35"
+        "Date": "November 02, 2022",
+        "Time": "03:10"
     },
     {
         "Name": "Yordan Alvarez",
-        "Prob": "93.99%"
+        "Prob": "92.33%"
     },
     {
         "Name": "Jose Altuve",
-        "Prob": "91.56%"
+        "Prob": "90.21%"
     },
     {
         "Name": "Kyle Tucker",
-        "Prob": "86.81%"
+        "Prob": "86.96%"
     },
     {
         "Name": "Alex Bregman",
-        "Prob": "85.9%"
+        "Prob": "86.05%"
     },
     {
         "Name": "Yuli Gurriel",
-        "Prob": "82.28%"
+        "Prob": "82.51%"
     }
 ]
