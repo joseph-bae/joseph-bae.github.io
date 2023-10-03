@@ -60,10 +60,10 @@ body, html {
 <!-- Add a background color and large text to the whole page -->
 <!-- <div class="w3-content w3-sand" style="max-width:1400px"> -->
 <div class="w3-large w3-sand w3-padding-large">
-<div class="w3-content" style="max-width:700px">
+<!-- <div class="w3-content" style="max-width:700px">
     <h3 class="w3-center "><span class="w3-tag w3-wide">CLOSED FOR THE YEAR<p style="font-size:12px; line-height:14px" >
     Shown are predictions for the 2022 post-season. This site will continue to update as MLB games are played, but note that the Beat the Streak contest only runs through the regular season. Check back in 2023 for updates!</p></span></h3>
-</div>
+</div> -->
 <!-- About Container -->
 <div class="w3-container" id="about">
 <div class="w3-row">
@@ -74,7 +74,19 @@ body, html {
   <!-- <img src="images/fulls/bg_blog.jpeg" style="width:100%"> -->
     <div class="w3-container w3-dark-grey w3-padding">
       <h4><label id="DateText">Date</label></h4>
-      <p style="font-size: 12px">Last Updated: <label id='UpdateTime'>time here</label> Eastern Time</p>
+      <p style="font-size: 12px">Last Updated: <label id='UpdateTime'>End of the World</label> Eastern Time</p>
+      <table style="margin-right: auto;margin-left: auto">
+        <tr>
+          <td style="padding-right:10px;"><b>Current Streak:</b></td>
+          <td style="padding-left:10px;" id="CurrentStreak">12</td>
+        </tr>
+        <tr>
+          <td style="padding-right:10px;"><b>Best Streak:</b></td>
+          <td style="padding-left:10px;" id="BestStreak:">12</td>
+        </tr>
+      </table>
+
+
    
       
     </div>
@@ -87,8 +99,8 @@ body, html {
   <div class="w3-col l8 s12"> 
     <div class="w3-center w3-display-container w3-margin">
 
-    <img src="assets/prediction_assets/1__playerImage.png" alt="baseball player"
-    style="width:100%">
+    <a id="Link1" href="#"><img src="assets/prediction_assets/1__playerImage.png" alt="baseball player"
+    style="width:100%"></a>
     
     <div class=jbae-topleft><span class="w3-text-white jbae-shadowtext" id="Name1" style="font-size:24px">Name</span></div>
     <div class=jbae-bottomright><span class="w3-text-white jbae-shadowtext" id="Prob1" style="font-size:24px">Probability</span></div>
@@ -97,8 +109,8 @@ body, html {
 
 <div class="w3-center w3-display-container w3-margin">
 
-    <img src="assets/prediction_assets/2__playerImage.png" alt="baseball player"
-    style="width:100%">
+    <a id="Link2" href="#"><img src="assets/prediction_assets/2__playerImage.png" alt="baseball player"
+    style="width:100%"></a>
     
     <div class=jbae-topleft><span class="w3-text-white jbae-shadowtext" id="Name2" style="font-size:24px">Name</span></div>
     <div class=jbae-bottomright><span class="w3-text-white jbae-shadowtext" id="Prob2" style="font-size:24px">Probability</span></div>
@@ -106,8 +118,8 @@ body, html {
 
 <div class="w3-center w3-display-container w3-margin">
 
-    <img src="assets/prediction_assets/3__playerImage.png" alt="baseball player"
-    style="width:100%">
+    <a id="Link3" href="#"><img src="assets/prediction_assets/3__playerImage.png" alt="baseball player"
+    style="width:100%"></a>
     
     <div class=jbae-topleft><span class="w3-text-white jbae-shadowtext" id="Name3" style="font-size:24px">Name</span></div>
     <div class=jbae-bottomright><span class="w3-text-white jbae-shadowtext" id="Prob3" style="font-size:24px">Probability</span></div>
@@ -115,8 +127,8 @@ body, html {
 
 <div class="w3-center w3-display-container w3-margin">
 
-    <img src="assets/prediction_assets/4__playerImage.png" alt="baseball player"
-    style="width:100%">
+    <a id="Link4" href="#"><img src="assets/prediction_assets/4__playerImage.png" alt="baseball player"
+    style="width:100%"></a>
     
     <div class=jbae-topleft><span class="w3-text-white jbae-shadowtext" id="Name4" style="font-size:24px">Name</span></div>
     <div class=jbae-bottomright><span class="w3-text-white jbae-shadowtext" id="Prob4" style="font-size:24px">Probability</span></div>
@@ -124,14 +136,61 @@ body, html {
 
 <div class="w3-center w3-display-container w3-margin">
 
-    <img src="assets/prediction_assets/5__playerImage.png" alt="baseball player"
-    style="width:100%">
+    <a id="Link5" href="#"><img src="assets/prediction_assets/5__playerImage.png" alt="baseball player"
+    style="width:100%"></a>
     
     <div class=jbae-topleft><span class="w3-text-white jbae-shadowtext" id="Name5" style="font-size:24px">Name</span></div>
     <div class=jbae-bottomright><span class="w3-text-white jbae-shadowtext" id="Prob5" style="font-size:24px">Probability</span></div>
     </div>
 
+  <div class="w3-center w3-display-container w3-margin">
+  <!-- <img src="images/fulls/bg_blog.jpeg" style="width:100%"> -->
+    <div class="w3-container w3-dark-grey w3-padding">
 
+      <h4 style="text-align:center">Recent Predictions</h4>
+
+   
+      
+    </div>
+    <div class="w3-container w3-light-grey">
+      <!-- <h4><b>Blog</b></h4> -->
+     <table style="margin-left: auto;margin-right: auto">
+        <tr>
+          <th style="padding-right:10px; padding-left:10px">Date</th>
+          <th style="padding-right:10px; padding-left:10px">Picks</th>
+          <th style="padding-right:10px; padding-left:10px">Result</th>
+        </tr>
+        <tr>
+          <td style="padding-right:10px; padding-left:10px" id="Date1">Date1</td>
+          <td style="padding-right:10px; padding-left:10px" id="Hist1">Hist1</td>
+          <td style="padding-right:10px; padding-left:10px" id="Res1">Res1</td>
+        </tr>
+        <tr>
+          <td style="padding-right:10px; padding-left:10px" id="Date2">Date2</td>
+          <td style="padding-right:10px; padding-left:10px" id="Hist2">Hist2</td>
+          <td style="padding-right:10px; padding-left:10px" id="Res2">Res2</td>
+        </tr>
+        <tr>
+          <td style="padding-right:10px; padding-left:10px" id="Date3">Date3</td>
+          <td style="padding-right:10px; padding-left:10px" id="Hist3">Hist3</td>
+          <td style="padding-right:10px; padding-left:10px" id="Res3">Res3</td>
+        </tr>
+        <tr>
+          <td style="padding-right:10px; padding-left:10px" id="Date4">Date4</td>
+          <td style="padding-right:10px; padding-left:10px" id="Hist4">Hist4</td>
+          <td style="padding-right:10px; padding-left:10px" id="Res4">Res4</td>
+        </tr>
+        <tr>
+          <td style="padding-right:10px; padding-left:10px" id="Date5">Date5</td>
+          <td style="padding-right:10px; padding-left:10px" id="Hist5">Hist5</td>
+          <td style="padding-right:10px; padding-left:10px" id="Res5">Res5</td>
+        </tr>
+
+
+
+      </table>
+      </div>
+  </div>
   </div>
 
   </div>
@@ -141,6 +200,7 @@ body, html {
 
 
 </div>
+
 
 <!-- End page content -->
 </div>
@@ -170,12 +230,55 @@ body, html {
   document.getElementById("DateText").textContent=PredData[0].Date
   document.getElementById("Name1").textContent=PredData[1].Name
   document.getElementById("Prob1").textContent=PredData[1].Prob
+  document.getElementById("Link1").innerHTML=PredData[1].Link
   document.getElementById("Name2").textContent=PredData[2].Name
+  document.getElementById("Link2").innerHTML=PredData[2].Link
   document.getElementById("Prob2").textContent=PredData[2].Prob
   document.getElementById("Name3").textContent=PredData[3].Name
   document.getElementById("Prob3").textContent=PredData[3].Prob
+  document.getElementById("Link3").innerHTML=PredData[3].Link
   document.getElementById("Name4").textContent=PredData[4].Name
   document.getElementById("Prob4").textContent=PredData[4].Prob
+  document.getElementById("Link4").innerHTML=PredData[4].Link
   document.getElementById("Name5").textContent=PredData[5].Name
-  document.getElementById("Prob5").textContent=PredData[5].Prob        
+  document.getElementById("Prob5").textContent=PredData[5].Prob
+  document.getElementById("Link5").innerHTML=PredData[5].Link
+
+  var xhReq_history = new XMLHttpRequest()
+  xhReq_history.open("GET",'assets/prediction_assets/History.json',false)
+  xhReq.send(null)
+  var HistoryData = JSON.parse(xhReq_history.responseText)
+  
+  document.getElementById("CurrentStreak").textContent=HistoryData[0].Current
+  document.getElementById("BestStreak").textContent=HistoryData[0].Best  
+
+  document.getElementById("Date1").textContent=HistoryData[1].Date
+  document.getElementById("Date2").textContent=HistoryData[2].Date
+  document.getElementById("Date3").textContent=HistoryData[3].Date
+  document.getElementById("Date4").textContent=HistoryData[4].Date
+  document.getElementById("Date5").textContent=HistoryData[5].Date
+
+  document.getElementById("Hist1").textContent=HistoryData[1].Hist
+  document.getElementById("Hist2").textContent=HistoryData[2].Hist
+  document.getElementById("Hist3").textContent=HistoryData[3].Hist
+  document.getElementById("Hist4").textContent=HistoryData[4].Hist
+  document.getElementById("Hist5").textContent=HistoryData[5].Hist
+
+  document.getElementById("Res1").textContent=HistoryData[1].Res
+  document.getElementById("Res2").textContent=HistoryData[2].Res
+  document.getElementById("Res3").textContent=HistoryData[3].Res
+  document.getElementById("Res4").textContent=HistoryData[4].Res
+  document.getElementById("Res5").textContent=HistoryData[5].Res
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
