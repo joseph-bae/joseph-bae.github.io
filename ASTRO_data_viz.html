@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html>
+<title>ASTRO 2025 Dataset Visualization</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://unpkg.com/feather-icons"></script>
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<style>
+    .chart-container {
+        position: relative;
+        height: 300px;
+        width: 100%;
+    }
+    .tooltip {
+        position: absolute;
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 8px;
+        border-radius: 4px;
+        pointer-events: none;
+        font-size: 12px;
+        z-index: 100;
+        display: none;
+    }
+    .filter-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    .data-row:hover {
+        background-color: #f3f4f6;
+    }
+    #resetButton {
+        position: fixed;       /* stay in place while scrolling */
+        bottom: 20px;          /* distance from bottom */
+        right: 20px;           /* distance from right */
+        padding: 12px 20px;    /* button size */
+        background-color: rgba(0, 34, 68, 0.7); /* indigo color */
+        color: white;
+        border: none;
+        border-radius: 50px;   /* round button */
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.2s, transform 0.2s;
+        z-index: 1000;         /* make sure it's on top */
+    }
+
+    #resetButton:hover {
+        background-color: rgba(0, 34, 68, 1); /* slightly darker on hover */
+        transform: scale(1.05);
+    }
+</style>
+<link rel="stylesheet" href="assets/css/blog.css" />
+<link rel="apple-touch-icon" sizes="76x76" href="images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon/favicon-16x16.png">
+<link rel="manifest" href="images/favicon/site.webmanifest">
+<link rel="mask-icon" href="images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="images/favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="images/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="assets/css/blog.css" />
+
+<style>
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5); /* semi-transparent background */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.close {
+    color: #333;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #000;
+}
+
+h1,h2,h3,h4,h5 {font-family: "D-DIN","Arial"}
+
+div.astro h1 a,
+div.astro h2 a {
+    color: white !important;
+    text-decoration: none !important;
+    border-bottom: 2px solid transparent;
+    padding: 2px 4px;
+    border-radius: 4px;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+div.astro h1 a:hover,
+div.astro h2 a:hover {
+    color: black !important;
+    background-color: white !important;
+    border-bottom: 2px solid black !important;
+}
+
+</style>
+<script>
+function openAbout() {
+    document.getElementById('aboutModal').style.display = 'block';
+}
+
+function closeAbout() {
+    document.getElementById('aboutModal').style.display = 'none';
+}
+
+// Optional: Close if user clicks outside the modal
+window.onclick = function(event) {
+    const modal = document.getElementById('aboutModal');
+    if (event.target === modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+<body class="w3-light-grey">
+
+  <div class="topnav" id="myTopnav">
+    <a href="index.html">Home</a>
+    <a href="pubs.html">Publications</a>
+    <!-- <a href="News.html">News</a> -->
+    <a href="blog.html" class>Blog</a>
+    <!-- <a href="baeball.html">Beat The Streak</a> -->
+    <a href="resume.html">Resume</a> 
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+  </div>
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-container w3-center w3-padding-16" style="background-color: black; color:white"> 
+  <p><b>ASTRO 2025 Abstract:</b> <br> Identifying Age, Race, and Sex Biases in Public Imaging and Genomic Datasets for Radiotherapy Patients</p>
+  <div class="astro">
+  <h1><a href="https://joseph-bae.github.io/index.html">Joseph Bae</a> and Brannon Cha</h1>
+  <h2><a href="javascript:void(0);" onclick="openAbout()">About This Project</a></h2>
+  </div>
+</div>
+<div class="w3-content" style="max-width:1400px">
+
+
+
+
+<button id="resetButton" onclick="SetDefaults()">Reset Filters</button>
+
+    <div id="aboutModal" class="modal">
+      <div class="modal-content w3-center">
+        <span class="close" onclick="closeAbout()">&times;</span>
+        <h1><b>About This Project</b></h1>
+        <br>
+        <p class = "w3-justify">This website visualizes demographic data from radiotherapy datasets hosted on the Cancer Imaging Archive (TCIA) and the Cancer Genomic Atlas (TCGA) as of January 2025. These datasets serve as very important public repositories for research. However, the demographic constitution of these datasets is not always transparently shared nor accounted for in research studies.</p>
+      </div>
+    </div>
+
+    <div id="app" class="min-h-screen">
+
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 py-8">
+            <!-- Filters Section -->
+            <section class="mb-8" data-aos="fade-up">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Database Filter -->
+                    <div class="filter-card bg-white p-4 rounded-lg shadow-md transition cursor-pointer">
+                        <h3 class="text-sm font-semibold text-gray-500 mb-2">Database</h3>
+                        <select id="databaseFilter" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-900 focus:border-green-900">
+                            <option value="all" selected>All</option>
+                            <option value="TCGA">TCGA</option>
+                            <option value="TCIA">TCIA</option>
+                        </select>
+                    </div>
+
+
+
+                    <div class="filter-card bg-white p-4 rounded-lg shadow-md transition cursor-pointer">
+                      <h3 class="text-sm font-semibold text-gray-500 mb-2">Dataset</h3>
+                      <select id="datasetFilter" 
+                              class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-900 focus:border-green-900">
+                        <option value="all" selected>All</option>
+                        <option value="ACRIN-NSCLC-FDG-PET">ACRIN-NSCLC-FDG-PET</option>
+                        <option value="APOLLO-LUAD">APOLLO-LUAD</option>
+                        <option value="Brain-TR-GammaKnife">Brain-TR-GammaKnife</option>
+                        <option value="Burdenko-GBM-Progression">Burdenko-GBM-Progression</option>
+                        <option value="CDDP">CDDP</option>
+                        <option value="CPTAC-3">CPTAC-3</option>
+                        <option value="CGCI-BLGSP">CGCI-BLGSP</option>
+                        <option value="CGCI-HTMCP-CC">CGCI-HTMCP-CC</option>
+                        <option value="CGCI-HTMCP-DLBCL">CGCI-HTMCP-DLBCL</option>
+                        <option value="CGCI-HTMCP-LC">CGCI-HTMCP-LC</option>
+                        <option value="DUKEBREASTCANCER">DUKEBREASTCANCER</option>
+                        <option value="HCMI-CMDC">HCMI-CMDC</option>
+                        <option value="Head-Neck-PET-CT">Head-Neck-PET-CT</option>
+                        <option value="HEAD-NECK-RADIOMICS-HN1">HEAD-NECK-RADIOMICS-HN1</option>
+                        <option value="HNSCC">HNSCC</option>
+                        <option value="HNSCC-3DCT-RT">HNSCC-3DCT-RT</option>
+                        <option value="Meningioma-SEG-CLASS">Meningioma-SEG-CLASS</option>
+                        <option value="NSCLC-Radiomics">NSCLC-Radiomics</option>
+                        <option value="NSCLC-Radiomics-Interobserver1">NSCLC-Radiomics-Interobserver1</option>
+                        <option value="Prostate-Anatomical-Edge-Cases">Prostate-Anatomical-Edge-Cases</option>
+                        <option value="QIN-HEADNECK">QIN-HEADNECK</option>
+                        <option value="RADCURE">RADCURE</option>
+                        <option value="REBC-THYR">REBC-THYR</option>
+                        <option value="REMEMBRANDT">REMEMBRANDT</option>
+                        <option value="Soft-tissue-Sarcoma">Soft-tissue-Sarcoma</option>
+                        <option value="TCGA-ACC">TCGA-ACC</option>
+                        <option value="TCGA-BLCA">TCGA-BLCA</option>
+                        <option value="TCGA-BRCA">TCGA-BRCA</option>
+                        <option value="TCGA-CESC">TCGA-CESC</option>
+                        <option value="TCGA-CHOL">TCGA-CHOL</option>
+                        <option value="TCGA-COAD">TCGA-COAD</option>
+                        <option value="TCGA-DLBC">TCGA-DLBC</option>
+                        <option value="TCGA-ESCA">TCGA-ESCA</option>
+                        <option value="TCGA-GBM">TCGA-GBM</option>
+                        <option value="TCGA-HNSC">TCGA-HNSC</option>
+                        <option value="TCGA-KICH">TCGA-KICH</option>
+                        <option value="TCGA-KIRC">TCGA-KIRC</option>
+                        <option value="TCGA-KIRP">TCGA-KIRP</option>
+                        <option value="TCGA-LAML">TCGA-LAML</option>
+                        <option value="TCGA-LGG">TCGA-LGG</option>
+                        <option value="TCGA-LIHC">TCGA-LIHC</option>
+                        <option value="TCGA-LUAD">TCGA-LUAD</option>
+                        <option value="TCGA-LUSC">TCGA-LUSC</option>
+                        <option value="TCGA-MESO">TCGA-MESO</option>
+                        <option value="TCGA-OV">TCGA-OV</option>
+                        <option value="TCGA-PAAD">TCGA-PAAD</option>
+                        <option value="TCGA-PCPG">TCGA-PCPG</option>
+                        <option value="TCGA-PRAD">TCGA-PRAD</option>
+                        <option value="TCGA-READ">TCGA-READ</option>
+                        <option value="TCGA-SARC">TCGA-SARC</option>
+                        <option value="TCGA-SKCM">TCGA-SKCM</option>
+                        <option value="TCGA-STAD">TCGA-STAD</option>
+                        <option value="TCGA-THCA">TCGA-THCA</option>
+                        <option value="TCGA-THYM">TCGA-THYM</option>
+                        <option value="TCGA-TGCT">TCGA-TGCT</option>
+                        <option value="TCGA-UCS">TCGA-UCS</option>
+                        <option value="TCGA-UCEC">TCGA-UCEC</option>
+                        <option value="TCGA-UVM">TCGA-UVM</option>
+
+                      </select>
+                    </div>
+
+
+
+
+
+                    <!-- Organ Filter -->
+                    <div class="filter-card bg-white p-4 rounded-lg shadow-md transition cursor-pointer">
+                        <h3 class="text-sm font-semibold text-gray-500 mb-2">Organ</h3>
+                        <select id="organFilter" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-900 focus:border-green-900">
+                                <option value="all" selected>All</option>
+                                <option value="adrenal_gland">Adrenal Gland</option>
+                                <option value="bladder">Bladder</option>
+                                <option value="bone/muscles/connective tissue">Bone / Muscles / Connective Tissue</option>
+                                <option value="brain">Brain</option>
+                                <option value="breast">Breast</option>
+                                <option value="cervix">Cervix</option>
+                                <option value="colon">Colon</option>
+                                <option value="esophagus">Esophagus</option>
+                                <option value="eye">Eye</option>
+                                <option value="gallbladder/biliary system">Gallbladder / Biliary System</option>
+                                <option value="head/neck">Head / Neck</option>
+                                <option value="kidney">Kidney</option>
+                                <option value="liver">Liver</option>
+                                <option value="lungs">Lungs</option>
+                                <option value="lymphatic system">Lymphatic System</option>
+                                <option value="mediastinum">Mediastinum</option>
+                                <option value="other">Other</option>
+                                <option value="ovary">Ovary</option>
+                                <option value="pancreas">Pancreas</option>
+                                <option value="prostate">Prostate</option>
+                                <option value="rectum">Rectum</option>
+                                <option value="small_intestine">Small Intestine</option>
+                                <option value="stomach">Stomach</option>
+                                <option value="testis">Testis</option>
+                                <option value="thyroid">Thyroid</option>
+                                <option value="uterus">Uterus</option>
+
+                              </select>
+                      </div>
+
+                    <!-- Sex Filter -->
+                    <div class="filter-card bg-white p-4 rounded-lg shadow-md transition cursor-pointer">
+                        <h3 class="text-sm font-semibold text-gray-500 mb-2">Sex</h3>
+                        <select id="sexFilter" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-900 focus:border-green-900">
+                            <option value="all" selected>All</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+
+                    <!-- Age Range Filter -->
+                    <div class="filter-card bg-white p-4 rounded-lg shadow-md transition cursor-pointer">
+                        <h3 class="text-sm font-semibold text-gray-500 mb-2">Age Range</h3>
+                        <div class="flex items-center space-x-2">
+                            <input type="number" id="minAge" placeholder="Min" class="w-1/2 p-2 border border-gray-300 rounded-md">
+                            <span>to</span>
+                            <input type="number" id="maxAge" placeholder="Max" class="w-1/2 p-2 border border-gray-300 rounded-md">
+                        </div>
+                    </div>
+
+                    <div class="filter-card bg-white p-4 rounded-lg shadow-md transition cursor-pointer">
+                      <h3 class="text-sm font-semibold text-gray-500 mb-2">Race</h3>
+                      <select id="raceFilter" 
+                              class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-900 focus:border-green-900">
+                        <option value="all" selected>All</option>
+                        <option value="american indian or alaska native">American Indian or Alaska Native</option>
+                        <option value="asian">Asian</option>
+                        <option value="black">Black</option>
+                        <option value="multi">Multi</option>
+                        <option value="native american">Native American</option>
+                        <option value="native hawaiian or other pacific islander">Native Hawaiian or Other Pacific Islander</option>
+                        <option value="other">Other</option>
+                        <option value="unknown">Unknown</option>
+                        <option value="white">White</option>
+                      </select>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Charts Section -->
+            <section class="mb-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Age Distribution Chart -->
+                <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-right">
+                    <h2 class="text-lg font-semibold mb-4">Age Distribution</h2>
+                    <div class="chart-container">
+                        <canvas id="ageChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Organ Distribution Chart -->
+                <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-left">
+                    <h2 class="text-lg font-semibold mb-4">Organ Distribution</h2>
+                    <div class="chart-container">
+                        <canvas id="organChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Sex Distribution Chart -->
+                <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-right">
+                    <h2 class="text-lg font-semibold mb-4">Sex Distribution</h2>
+                    <div class="chart-container">
+                        <canvas id="sexChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Race Distribution Chart -->
+                <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-left">
+                    <h2 class="text-lg font-semibold mb-4">Race Distribution</h2>
+                    <div class="chart-container">
+                        <canvas id="raceChart"></canvas>
+                    </div>
+                </div>
+
+
+                <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-right">
+                    <h2 class="text-lg font-semibold mb-4">Database Distribution</h2>
+                    <div class="chart-container">
+                        <canvas id="databaseChart"></canvas>
+                    </div>
+                </div>
+
+
+
+                <div class="bg-white p-6 rounded-lg shadow-md" data-aos="fade-left">
+                    <h2 class="text-lg font-semibold mb-4">Dataset Distribution</h2>
+                    <div class="chart-container">
+                        <canvas id="datasetChart"></canvas>
+                    </div>
+                </div>
+
+            </section>
+
+
+        </main>
+
+        <!-- Tooltip -->
+        <div id="tooltip" class="tooltip"></div>
+    </div>
+
+    <script>
+        // Initialize AOS and Feather Icons
+        AOS.init();
+        feather.replace();
+
+
+        let data = [];
+        
+
+        fetch("data_demographics/data.json")
+          .then(response => response.json())
+          .then(json => {
+            data = json;
+            
+            
+            filterData();
+          })
+          .catch(error => console.error("Error loading JSON:", error));
+
+        // Initialize charts
+        let ageChart, organChart, sexChart, raceChart, databaseChart;
+        let filteredData = [...data];
+
+        function initCharts() {
+            // Age Distribution Chart (Histogram)
+            const ageCtx = document.getElementById('ageChart').getContext('2d');
+            ageChart = new Chart(ageCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['0-20', '21-40', '41-60', '61-80', '81+'],
+                    datasets: [{
+                        label: '',
+                        data: [0, 0, 0, 0, 0],
+                        backgroundColor: 'rgba(107, 0, 13, 0.7)',
+                        borderColor: 'rgba(0, 0, 0, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                                display: false
+                            },
+                        tooltip: {
+                            
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.parsed.y} patients`;
+                                }
+                            }
+                        }
+                    },
+                    onClick: (e, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const minAge = index * 20+1;
+                            const maxAge = (index + 1) * 20;
+                            document.getElementById('minAge').value = minAge;
+                            document.getElementById('maxAge').value = maxAge;
+                            filterData();
+                        }
+                    }
+                }
+            });
+
+            // Organ Distribution Chart (Doughnut)
+            const organCtx = document.getElementById('organChart').getContext('2d');
+            organChart = new Chart(organCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        data: [],
+                        backgroundColor: [],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    size: 10 // smaller font
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    onClick: (e, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const organ = organChart.data.labels[index];
+                            document.getElementById('organFilter').value = organ;
+                            filterData();
+                        }
+                    }
+                }
+            });
+
+            // Sex Distribution Chart (Pie)
+            const sexCtx = document.getElementById('sexChart').getContext('2d');
+            sexChart = new Chart(sexCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Male', 'Female'],
+                    datasets: [{
+                        data: [0, 0],
+                        backgroundColor: [
+                            'rgba(0, 34, 68, 0.7)',
+                            'rgba(107, 0, 13, 0.7)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    onClick: (e, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const sex = sexChart.data.labels[index].toLowerCase();
+                            document.getElementById('sexFilter').value = sex;
+                            filterData();
+                        }
+                    }
+                }
+            });
+
+            // Race Distribution Chart (Bar)
+            const raceCtx = document.getElementById('raceChart').getContext('2d');
+            raceChart = new Chart(raceCtx, {
+                type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: '',
+                        data: [],
+                        backgroundColor: 'rgba(0, 34, 68, 0.7)',
+                        borderColor: 'rgba(0, 0, 0, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                precision: 0
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.parsed.y} patients`;
+                                }
+                            }
+                        }
+                    },
+                    onClick: (e, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const race = raceChart.data.labels[index].toLowerCase();
+                            document.getElementById('raceFilter').value = race;
+                            filterData();
+                        }
+                    }
+                }
+            });
+
+
+
+            const databaseCtx = document.getElementById('databaseChart').getContext('2d');
+            databaseChart = new Chart(databaseCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['TCIA', 'TCGA'],
+                    datasets: [{
+                        data: [0, 0],
+                        backgroundColor: [
+                            'rgba(0, 34, 68, 0.7)',
+                            'rgba(107, 0, 13, 0.7)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    onClick: (e, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const database = databaseChart.data.labels[index];
+                            document.getElementById('databaseFilter').value = database;
+                            filterData();
+                        }
+                    }
+                }
+            });
+
+
+
+
+            const datasetCtx = document.getElementById('datasetChart').getContext('2d');
+            datasetChart = new Chart(datasetCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        data: [],
+                        backgroundColor: [],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    size: 10 // smaller font
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    onClick: (e, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const dataset = datasetChart.data.labels[index];
+                            document.getElementById('datasetFilter').value = dataset;
+                            filterData();
+                        }
+                    }
+                }
+            });
+
+
+
+
+            updateCharts(data);
+
+        }
+
+        function generateShades(count, alpha = 0.8, saturation = 60, minLightness = 30, maxLightness = 50) {
+            const colors = [];
+            for (let i = 0; i < count; i++) {
+                // Spread lightness from minLightness → maxLightness
+                const lightness = minLightness + ((maxLightness - minLightness) * i) / Math.max(count - 1, 1);
+                const hue = (i * 360) / count; // spread hues evenly
+                colors.push(`hsla(${hue}, ${saturation}%, ${lightness}%, ${alpha})`);
+            }
+            return colors;
+        }
+        function updateCharts(data) {
+            // Update Age Distribution Chart
+            const ageBins = [0, 0, 0, 0, 0]; // 0-20, 21-40, 41-60, 61-80, 81+
+            data.forEach(item => {
+                if (item.age <= 20) ageBins[0]++;
+                else if (item.age <= 40) ageBins[1]++;
+                else if (item.age <= 60) ageBins[2]++;
+                else if (item.age <= 80) ageBins[3]++;
+                else ageBins[4]++;
+            });
+            ageChart.data.datasets[0].data = ageBins;
+            ageChart.update();
+
+            // Update Organ Distribution Chart
+            const organCounts = {};
+            data.forEach(item => {
+                organCounts[item.organ] = (organCounts[item.organ] || 0) + 1;
+            });
+            organChart.data.labels = Object.keys(organCounts);
+            organChart.data.datasets[0].backgroundColor = generateShades(Object.keys(organCounts).length)
+            organChart.data.datasets[0].data = Object.values(organCounts);
+            organChart.update();
+
+            // Update Sex Distribution Chart
+            const sexCounts = { 'Male': 0, 'Female': 0 };
+            data.forEach(item => {
+                if (item.sex === 'male') sexCounts['Male']++;
+                else if (item.sex === 'female') sexCounts['Female']++;
+            });
+            sexChart.data.datasets[0].data = Object.values(sexCounts);
+            sexChart.update();
+
+
+            const databaseCounts = { 'TCIA': 0, 'TCGA': 0 };
+            data.forEach(item => {
+                if (item.Database === 'TCIA') databaseCounts['TCIA']++;
+                else if (item.Database === 'TCGA') databaseCounts['TCGA']++;
+            });
+            databaseChart.data.datasets[0].data = Object.values(databaseCounts);
+            databaseChart.update();
+
+
+
+            const datasetCounts = {};
+            data.forEach(item => {
+                datasetCounts[item.Dataset] = (datasetCounts[item.Dataset] || 0) + 1;
+            });
+            datasetChart.data.labels = Object.keys(datasetCounts);
+            datasetChart.data.datasets[0].backgroundColor = generateShades(Object.keys(datasetCounts).length)
+            datasetChart.data.datasets[0].data = Object.values(datasetCounts);
+            datasetChart.update();
+
+
+
+
+            // Update Race Distribution Chart
+            const raceCounts = {};
+            data.forEach(item => {
+                const race = item.race === 'unknown' ? 'Unknown' : 
+                            item.race === 'asian' ? 'Asian' : 
+                            item.race === 'white' ? 'White' : 
+                            item.race === 'black' ? 'Black' : item.race;
+                raceCounts[race] = (raceCounts[race] || 0) + 1;
+            });
+            raceChart.data.labels = Object.keys(raceCounts);
+            raceChart.data.datasets[0].data = Object.values(raceCounts);
+            raceChart.update();
+        }
+
+        function SetDefaults(){
+
+            document.getElementById("databaseFilter").value = "all";
+            document.getElementById("sexFilter").value = "all";
+            document.getElementById("organFilter").value = "all";
+            document.getElementById("datasetFilter").value = "all";
+            document.getElementById("raceFilter").value = "all";
+            document.getElementById("minAge").value = "";
+            document.getElementById("maxAge").value = "";
+            filterData()
+            return
+        }
+
+        function filterData() {
+            const databaseFilter = document.getElementById('databaseFilter').value;
+            const datasetFilter = document.getElementById('datasetFilter').value;
+            const organFilter = document.getElementById('organFilter').value;
+            const sexFilter = document.getElementById('sexFilter').value;
+            const minAge = parseInt(document.getElementById('minAge').value) || 0;
+            const maxAge = parseInt(document.getElementById('maxAge').value) || 150;
+            const raceFilter = document.getElementById('raceFilter').value;
+            filteredData = data.filter(item => {
+                return (databaseFilter === 'all' || item.Database === databaseFilter) &&
+                       (datasetFilter == 'all' || item.Dataset === datasetFilter) &&
+                       (organFilter === 'all' || item.organ === organFilter) &&
+                       (sexFilter === 'all' || item.sex === sexFilter) &&
+                       (raceFilter === 'all' || item.race === raceFilter) &&
+                       (item.age >= minAge && item.age <= maxAge);
+            });
+
+            updateCharts(filteredData);
+
+        }
+
+        // Event Listeners
+        document.getElementById('databaseFilter').addEventListener('change', filterData);
+        document.getElementById('datasetFilter').addEventListener('change', filterData);
+        document.getElementById('organFilter').addEventListener('change', filterData);
+        document.getElementById('sexFilter').addEventListener('change', filterData);
+        document.getElementById('raceFilter').addEventListener('change', filterData);
+        document.getElementById('minAge').addEventListener('change', filterData);
+        document.getElementById('maxAge').addEventListener('change', filterData);
+        
+        
+
+        
+        document.addEventListener('mousemove', (e) => {
+            const tooltip = document.getElementById('tooltip');
+            if (tooltip.style.display === 'block') {
+                tooltip.style.left = `${e.pageX + 10}px`;
+                tooltip.style.top = `${e.pageY + 10}px`;
+            }
+        });
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', initCharts);
+    </script>
+
+
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-black w3-center w3-margin-top">
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a> <br />&copy; <a href="index.html">Joseph Bae 2025</a>
+
+</footer>
+
+</body>
+</html>

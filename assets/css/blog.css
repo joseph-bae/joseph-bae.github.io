@@ -72,6 +72,8 @@ hr.new{
 		text-decoration:none;
 	}
 
+
+
 	/* Style the links inside the navigation bar */
 	.topnav a {
 	  float: left;
@@ -82,7 +84,9 @@ hr.new{
 	  text-decoration: none;
 	  font-size: 17px;
 	}
-
+	.topnav a.about-right {
+    float: right;
+  	}
 	/* Change the color of links on hover */
 	.topnav a:hover {
 	  background-color: #ddd;
