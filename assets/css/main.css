@@ -2864,7 +2864,7 @@ input, select, textarea {
 			.poptrox-popup .loader:before {
 				content: '\f1ce';
 			}
-
+		
 		.poptrox-popup .caption {
             -webkit-transform: translateZ(0px);
             color: black;
@@ -2876,10 +2876,12 @@ input, select, textarea {
 			left: 0;
 			line-height: 2.0em;
 			position: absolute;
-			text-align: center;
+			text-align: justify;
 			width: 100%;
 			z-index: 1;
             opacity: .95;
+            padding: 2em;
+            box-sizing: border-box;
 		}
 
 		.poptrox-popup .nav-next,
