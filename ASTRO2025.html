@@ -316,6 +316,8 @@ and is wrapped around the whole page content, except for the footer in this exam
                             <option value="all" selected>All</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
+                            <option value="unknown">Unknown</option>
+                            
                         </select>
                     </div>
 
@@ -438,10 +440,10 @@ and is wrapped around the whole page content, except for the footer in this exam
             ageChart = new Chart(ageCtx, {
                 type: 'bar',
                 data: {
-                    labels: ['0-20', '21-40', '41-60', '61-80', '81+'],
+                    labels: ['Unknown','0-20', '21-40', '41-60', '61-80', '81+'],
                     datasets: [{
                         label: '',
-                        data: [0, 0, 0, 0, 0],
+                        data: [0, 0, 0, 0, 0, 0],
                         backgroundColor: 'rgba(107, 0, 13, 0.7)',
                         borderColor: 'rgba(0, 0, 0, 1)',
                         borderWidth: 1
@@ -473,12 +475,14 @@ and is wrapped around the whole page content, except for the footer in this exam
                     },
                     onClick: (e, elements) => {
                         if (elements.length > 0) {
-                            const index = elements[0].index;
-                            const minAge = index * 20+1;
-                            const maxAge = (index + 1) * 20;
-                            document.getElementById('minAge').value = minAge;
-                            document.getElementById('maxAge').value = maxAge;
-                            filterData();
+                            if (elements[0].index>0) {
+                                const index = elements[0].index;
+                                const minAge = (index+1) * 20+1;
+                                const maxAge = (index + 2) * 20;
+                                document.getElementById('minAge').value = minAge;
+                                document.getElementById('maxAge').value = maxAge;
+                                filterData();
+                            }
                         }
                     }
                 }
@@ -536,12 +540,13 @@ and is wrapped around the whole page content, except for the footer in this exam
             sexChart = new Chart(sexCtx, {
                 type: 'pie',
                 data: {
-                    labels: ['Male', 'Female'],
+                    labels: ['Male', 'Female','Unknown'],
                     datasets: [{
                         data: [0, 0],
                         backgroundColor: [
                             'rgba(0, 34, 68, 0.7)',
-                            'rgba(107, 0, 13, 0.7)'
+                            'rgba(107, 0, 13, 0.7)',
+                            'rgba(190, 190, 190, 0.7)'
                         ],
                         borderWidth: 1
                     }]
@@ -732,13 +737,14 @@ and is wrapped around the whole page content, except for the footer in this exam
         }
         function updateCharts(data) {
             // Update Age Distribution Chart
-            const ageBins = [0, 0, 0, 0, 0]; // 0-20, 21-40, 41-60, 61-80, 81+
+            const ageBins = [0,0, 0, 0, 0, 0]; // 0-20, 21-40, 41-60, 61-80, 81+
             data.forEach(item => {
-                if (item.age <= 20) ageBins[0]++;
-                else if (item.age <= 40) ageBins[1]++;
-                else if (item.age <= 60) ageBins[2]++;
-                else if (item.age <= 80) ageBins[3]++;
-                else ageBins[4]++;
+                if (item.age === "unknown") ageBins[0]++;
+                else if (item.age <= 20) ageBins[1]++;
+                else if (item.age <= 40) ageBins[2]++;
+                else if (item.age <= 60) ageBins[3]++;
+                else if (item.age <= 80) ageBins[4]++;
+                else ageBins[5]++;
             });
             ageChart.data.datasets[0].data = ageBins;
             ageChart.update();
@@ -754,10 +760,11 @@ and is wrapped around the whole page content, except for the footer in this exam
             organChart.update();
 
             // Update Sex Distribution Chart
-            const sexCounts = { 'Male': 0, 'Female': 0 };
+            const sexCounts = { 'Male': 0, 'Female': 0, 'Unknown':0};
             data.forEach(item => {
                 if (item.sex === 'male') sexCounts['Male']++;
                 else if (item.sex === 'female') sexCounts['Female']++;
+                else sexCounts['Unknown']++;
             });
             sexChart.data.datasets[0].data = Object.values(sexCounts);
             sexChart.update();
@@ -817,8 +824,13 @@ and is wrapped around the whole page content, except for the footer in this exam
             const datasetFilter = document.getElementById('datasetFilter').value;
             const organFilter = document.getElementById('organFilter').value;
             const sexFilter = document.getElementById('sexFilter').value;
-            const minAge = parseInt(document.getElementById('minAge').value) || 0;
-            const maxAge = parseInt(document.getElementById('maxAge').value) || 150;
+            const minAge = document.getElementById('minAge').value === "" 
+              ? "" 
+              : parseInt(document.getElementById('minAge').value);
+
+            const maxAge = document.getElementById('maxAge').value === "" 
+              ? "" 
+              : parseInt(document.getElementById('maxAge').value);
             const raceFilter = document.getElementById('raceFilter').value;
             filteredData = data.filter(item => {
                 return (databaseFilter === 'all' || item.Database === databaseFilter) &&
@@ -826,7 +838,10 @@ and is wrapped around the whole page content, except for the footer in this exam
                        (organFilter === 'all' || item.organ === organFilter) &&
                        (sexFilter === 'all' || item.sex === sexFilter) &&
                        (raceFilter === 'all' || item.race === raceFilter) &&
-                       (item.age >= minAge && item.age <= maxAge);
+                       (
+                          (minAge === "" && maxAge === "") || 
+                          (item.age >= minAge && item.age <= maxAge)
+                        );
             });
 
             updateCharts(filteredData);
