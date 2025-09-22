@@ -419,7 +419,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 
         let data = [];
         
-
+        
         fetch("data_demographics/data.json")
           .then(response => response.json())
           .then(json => {
@@ -477,8 +477,10 @@ and is wrapped around the whole page content, except for the footer in this exam
                         if (elements.length > 0) {
                             if (elements[0].index>0) {
                                 const index = elements[0].index;
-                                const minAge = (index+1) * 20+1;
-                                const maxAge = (index + 2) * 20;
+                                const minAge = (index-1) * 20+1;
+                                let maxAge
+                                if (index === 5)  maxAge = 200;
+                                else  maxAge = (index) * 20;
                                 document.getElementById('minAge').value = minAge;
                                 document.getElementById('maxAge').value = maxAge;
                                 filterData();
@@ -542,7 +544,7 @@ and is wrapped around the whole page content, except for the footer in this exam
                 data: {
                     labels: ['Male', 'Female','Unknown'],
                     datasets: [{
-                        data: [0, 0],
+                        data: [0, 0, 0],
                         backgroundColor: [
                             'rgba(0, 34, 68, 0.7)',
                             'rgba(107, 0, 13, 0.7)',
@@ -739,12 +741,27 @@ and is wrapped around the whole page content, except for the footer in this exam
             // Update Age Distribution Chart
             const ageBins = [0,0, 0, 0, 0, 0]; // 0-20, 21-40, 41-60, 61-80, 81+
             data.forEach(item => {
-                if (item.age === "unknown") ageBins[0]++;
-                else if (item.age <= 20) ageBins[1]++;
-                else if (item.age <= 40) ageBins[2]++;
-                else if (item.age <= 60) ageBins[3]++;
-                else if (item.age <= 80) ageBins[4]++;
-                else ageBins[5]++;
+                let age = item.age;
+
+                // If it's a string, try to parse to number
+                if (typeof age === "string") {
+                    age = parseFloat(age);  // handles decimals in strings like "23.7"
+                }
+
+                // Only round if it's a valid number
+                if (!isNaN(age)) {
+                    age = Math.round(age);
+
+                    if (age <= 20) ageBins[1]++;
+                    else if (age <= 40) ageBins[2]++;
+                    else if (age <= 60) ageBins[3]++;
+                    else if (age <= 80) ageBins[4]++;
+                    else if (age > 80) ageBins[5]++;
+                    else ageBins[0]++;
+                } else {
+                    // fallback for invalid ages
+                    ageBins[0]++;
+                }
             });
             ageChart.data.datasets[0].data = ageBins;
             ageChart.update();
@@ -832,7 +849,29 @@ and is wrapped around the whole page content, except for the footer in this exam
               ? "" 
               : parseInt(document.getElementById('maxAge').value);
             const raceFilter = document.getElementById('raceFilter').value;
+            
             filteredData = data.filter(item => {
+
+
+                let tempage = item.age            
+                if (!(minAge === "" && maxAge === "")) {
+
+                    if (typeof tempage === "string") {
+                        tempage = parseFloat(tempage);
+                    }
+
+                    // If age is a valid number, round it
+                    if (!isNaN(tempage)) {
+                        tempage = Math.round(tempage);
+                    } else {
+                        // invalid age (string like "N/A"), fail the filter
+                        return false;
+                    }
+
+                }
+
+
+
                 return (databaseFilter === 'all' || item.Database === databaseFilter) &&
                        (datasetFilter == 'all' || item.Dataset === datasetFilter) &&
                        (organFilter === 'all' || item.organ === organFilter) &&
@@ -840,7 +879,7 @@ and is wrapped around the whole page content, except for the footer in this exam
                        (raceFilter === 'all' || item.race === raceFilter) &&
                        (
                           (minAge === "" && maxAge === "") || 
-                          (item.age >= minAge && item.age <= maxAge)
+                          (tempage >= minAge && tempage <= maxAge)
                         );
             });
 
