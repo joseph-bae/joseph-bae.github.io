@@ -107,9 +107,10 @@ h1,h2,h3,h4,h5 {font-family: "D-DIN","Arial"}
 
 div.astro h1 a,
 div.astro h2 a {
-    color: white !important;
-    text-decoration: none !important;
-    border-bottom: 2px solid transparent;
+    color: black !important;
+    background-color: white !important;
+    font-weight: bold !important;
+    border-bottom: 1px dashed black;
     padding: 2px 4px;
     border-radius: 4px;
     display: inline-block;
@@ -119,7 +120,8 @@ div.astro h2 a {
 div.astro h1 a:hover,
 div.astro h2 a:hover {
     color: black !important;
-    background-color: white !important;
+    background-color: #49bf9d !important;
+    transform: scale(1.2);
     border-bottom: 2px solid black !important;
 }
 
@@ -160,7 +162,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 <div class="w3-container w3-center w3-padding-16" style="background-color: black; color:white"> 
   <p><b>ASTRO 2025 Abstract:</b> <br> Identifying Age, Race, and Sex Biases in Public Imaging and Genomic Datasets for Radiotherapy Patients</p>
   <div class="astro">
-  <h1><a href="https://joseph-bae.github.io/index.html">Joseph Bae</a> and Brannon Cha</h1>
+  <h1><a href="https://joseph-bae.github.io/index.html">Joseph Bae</a> and Brannon Cha</h1> <br />
   <h2><a href="javascript:void(0);" onclick="openAbout()">About This Project</a></h2>
   </div>
 </div>
@@ -174,8 +176,9 @@ and is wrapped around the whole page content, except for the footer in this exam
     <div id="aboutModal" class="modal">
       <div class="modal-content w3-center">
         <span class="close" onclick="closeAbout()">&times;</span>
+        
         <h1><b>About This Project</b></h1>
-        <br>
+        <br />
         <p class = "w3-justify">This website visualizes demographic data from radiotherapy datasets hosted on the Cancer Imaging Archive (TCIA) and the Cancer Genomic Atlas (TCGA) as of January 2025. These datasets serve as very important public repositories for research. However, the demographic constitution of these datasets is not always transparently shared nor accounted for in research studies.</p>
       </div>
     </div>
