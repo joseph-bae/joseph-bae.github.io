@@ -419,7 +419,7 @@ and is wrapped around the whole page content, except for the footer in this exam
 
         let data = [];
         
-        
+
         fetch("data_demographics/data.json")
           .then(response => response.json())
           .then(json => {
@@ -468,7 +468,12 @@ and is wrapped around the whole page content, except for the footer in this exam
                             
                             callbacks: {
                                 label: function(context) {
-                                    return `${context.parsed.y} patients`;
+
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((context.parsed.y / total) * 100);
+                                    return `${context.parsed.y} (${percentage}%) patients`;
+
+                                    // return `${context.parsed.y} patients`;
                                 }
                             }
                         }
@@ -612,7 +617,9 @@ and is wrapped around the whole page content, except for the footer in this exam
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return `${context.parsed.y} patients`;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((context.parsed.y / total) * 100);
+                                    return `${context.parsed.y} (${percentage}%) patients`;
                                 }
                             }
                         }
