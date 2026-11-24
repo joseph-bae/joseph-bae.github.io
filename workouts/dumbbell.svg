@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Cardinal and gold dumbbell</title>
+  <g stroke="#650016" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Weight plates -->
+    <path d="M9 18h8v28H9a4 4 0 0 1-4-4V22a4 4 0 0 1 4-4Z" fill="#85001c" stroke-width="2.5"/>
+    <path d="M47 18h8a4 4 0 0 1 4 4v20a4 4 0 0 1-4 4h-8Z" fill="#85001c" stroke-width="2.5"/>
+    <!-- Gold collars -->
+    <path d="M17 23h6v18h-6zM41 23h6v18h-6z" fill="#c99c4b" stroke-width="2"/>
+    <!-- Bar -->
+    <path d="M23 29h18v6H23z" fill="#c99c4b" stroke-width="2"/>
+    <!-- Plate highlights -->
+    <path d="M10 25v14M54 25v14" fill="none" stroke="#e1c381" stroke-width="2.5"/>
+  </g>
+</svg>
