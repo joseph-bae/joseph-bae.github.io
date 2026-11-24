@@ -163,7 +163,7 @@
     button.disabled=false;button.textContent='Refresh data';
   }
   function refreshImportedProfiles(imported, updatedAt) {
-    const {profiles:profileRows,names:newNames}=imported;
+    const {profiles:profileRows,profileNames:newNames}=imported;
     const preparedProfiles={};
     for(const key of PROFILE_KEYS){
       if(!Array.isArray(profileRows[key])||profileRows[key].length===0)throw new Error(`No ${PROFILE_INFO[key].name} entries were found in the sheet.`);
