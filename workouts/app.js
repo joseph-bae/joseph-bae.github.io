@@ -228,11 +228,13 @@
     const monthVolumes=new Map();
     entries.forEach((row)=>{const month=row.dateKey.slice(0,7);monthVolumes.set(month,(monthVolumes.get(month)||0)+(row.volume||0));});
     const topMonth=[...monthVolumes].sort((a,b)=>b[1]-a[1])[0];
+    const cumulativeVolume=entries.reduce((sum,row)=>sum+(row.volume||0),0);
+    const firstWorkout=dateKeys[0];
     const liftDays=new Map();
     entries.forEach((row)=>{if(row.weight===null)return;if(!liftDays.has(row.liftKey))liftDays.set(row.liftKey,new Map());const days=liftDays.get(row.liftKey);days.set(row.dateKey,Math.max(days.get(row.dateKey)||0,row.weight));});
     let biggest={name:'—',increase:0};
     for(const [name,days] of liftDays){const values=[...days].sort((a,b)=>a[0].localeCompare(b[0]));if(values.length<2)continue;const increase=values.at(-1)[1]-values[0][1];if(increase>biggest.increase)biggest={name:name.replace(/\b\w/g,c=>c.toLocaleUpperCase()),increase};}
-    const stats=[['Training days',dateKeys.length.toLocaleString(),'days logged'],['Longest streak',`${longest} ${longest===1?'day':'days'}`,'consecutive training days'],['Most volume in a month',topMonth&&topMonth[1]?`${compact(topMonth[1])} lb`:'—',topMonth?new Intl.DateTimeFormat('en-US',{month:'long',year:'numeric'}).format(new Date(`${topMonth[0]}-01T12:00:00`)):'tracked volume'],['Biggest lift increase',biggest.increase>0?`+${compact(biggest.increase)} lb`:'—',biggest.increase>0?`${biggest.name} · first to latest`:'not enough history yet']];
+    const stats=[['Cumulative weight lifted',cumulativeVolume?`${compact(cumulativeVolume)} lb`:'—','total across all logged workouts'],['First recorded workout',firstWorkout?longDate(new Date(`${firstWorkout}T12:00:00`)):'—','earliest date in this training history'],['Training days',dateKeys.length.toLocaleString(),'days logged'],['Longest streak',`${longest} ${longest===1?'day':'days'}`,'consecutive training days'],['Most volume in a month',topMonth&&topMonth[1]?`${compact(topMonth[1])} lb`:'—',topMonth?new Intl.DateTimeFormat('en-US',{month:'long',year:'numeric'}).format(new Date(`${topMonth[0]}-01T12:00:00`)):'tracked volume'],['Biggest lift increase',biggest.increase>0?`+${compact(biggest.increase)} lb`:'—',biggest.increase>0?`${biggest.name} · first to latest`:'not enough history yet']];
     $('statsTitle').textContent=`${PROFILE_INFO[activeProfileKey].name}’s stats`;
     $('funStatsGrid').innerHTML=stats.map(([label,value,note])=>`<article class="fun-stat"><span class="metric-label">${escapeHTML(label)}</span><strong>${escapeHTML(value)}</strong><span>${escapeHTML(note)}</span></article>`).join('');
     const targets=[['Bench press',name=>/\bbench press\b/.test(name)],['Squat',name=>/^squat$/.test(name)||/^barbell squat$/.test(name)],['Overhead press',name=>/\boverhead press\b/.test(name)],['Lat pulldown',name=>/\blat pulldown\b/.test(name)],['Barbell row',name=>/barbell.*\brow\b/.test(name)]];
