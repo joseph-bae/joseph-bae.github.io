@@ -191,15 +191,19 @@
     if(!csvUrl)return;
     refreshInProgress=true;updateRefreshButton();setSyncStatus('Fetching latest Google Sheet…','loading');
     try{
-      const response=await fetch(csvUrl,{cache:'no-cache',headers:{accept:'text/csv,text/plain;q=0.9,*/*;q=0.1'}});
+      const freshUrl=new URL(csvUrl,window.location.href);
+      freshUrl.searchParams.set('_refresh',String(Date.now()));
+      const response=await fetch(freshUrl.toString(),{cache:'no-store',headers:{accept:'text/csv,text/plain;q=0.9,*/*;q=0.1'}});
       if(!response.ok)throw new Error(`Sheet returned HTTP ${response.status}.`);
       const imported=window.WorkoutImporter.parseGoogleSheetCsv(await response.text());
       const updatedAt=new Date().toISOString();
       refreshImportedProfiles(imported,updatedAt);
       lastSheetRefresh=Date.now();
       try{localStorage.setItem(SHEET_REFRESH_KEY,String(lastSheetRefresh));}catch(_error){}
+      $('refreshData').title='Fetch the latest workout sheet data';
       setSyncStatus(`Sheet refreshed ${formatSyncTime(updatedAt)}`,'ready');
     }catch(error){
+      $('refreshData').title=`Refresh failed: ${error&&error.message?error.message:'unknown error'}`;
       setSyncStatus('Refresh failed · showing saved data','error');
       console.error('Workout sheet refresh failed:',error);
     }finally{refreshInProgress=false;updateRefreshButton();}
