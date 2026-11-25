@@ -40,3 +40,25 @@
 .chart-y-axis{display:block;width:46px;height:250px;overflow:visible}
 .chart-frame .chart-scroll svg{height:250px}
 @media(max-width:760px){.topbar-right{gap:8px}.sync-status{display:none}.refresh-data-button{padding:7px 8px;font-size:9px}}
+.annual-heading{align-items:center}
+.annual-year-controls{display:flex;align-items:center;gap:9px}
+.annual-year-controls strong{min-width:50px;text-align:center;font-family:var(--display);font-size:18px}
+.annual-legend{display:flex;align-items:center;gap:8px;margin:-4px 0 14px;color:#847d7e;font-size:10px}
+.annual-legend i{width:11px;height:11px;border-radius:2px;background:var(--cardinal)}
+.annual-legend .calendar-hint{margin-left:auto}
+.annual-months{display:flex;flex-direction:column;gap:9px}
+.annual-month{display:grid;grid-template-columns:minmax(145px,.65fr) minmax(0,1fr);align-items:center;gap:18px;padding:15px 18px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)}
+.annual-month-label h3{margin:0 0 5px;font-family:var(--display);font-size:16px;letter-spacing:-.025em}
+.annual-month-label span{color:#9a9292;font-size:10px}
+.annual-month-calendar{width:min(100%,310px)}
+.annual-weekdays,.annual-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.annual-weekdays{margin-bottom:4px}
+.annual-weekdays span{height:15px;text-align:center;color:#aaa3a4;font-size:8px;font-weight:700}
+.annual-day{display:grid;place-items:center;min-width:0;aspect-ratio:1;border:1px solid transparent;border-radius:3px;background:#f7f6f4;color:#777071;font-size:9px;text-decoration:none}
+button.annual-day{padding:0;cursor:pointer}
+button.annual-day:hover{border-color:var(--gold);background:#fbf7ef}
+.annual-day.has-workout{background:var(--cardinal);color:#fff;font-weight:700}
+button.annual-day.has-workout:hover{background:var(--cardinal-dark)}
+.annual-day.selected{box-shadow:inset 0 0 0 2px var(--gold)}
+.annual-day.empty{visibility:hidden}
+@media(max-width:760px){.annual-heading{align-items:stretch}.annual-year-controls{justify-content:flex-start}.annual-month{grid-template-columns:1fr;gap:10px;padding:13px}.annual-month-calendar{width:min(100%,320px)}.annual-legend .calendar-hint{font-size:9px}}

@@ -26,6 +26,7 @@
 
       <nav class="view-tabs" aria-label="Training views">
         <button class="view-tab active" type="button" data-view="calendar">Calendar</button>
+        <button class="view-tab" type="button" data-view="annual">Annual overview</button>
         <button class="view-tab" type="button" data-view="log">Workout log</button>
         <button class="view-tab" type="button" data-view="stats">Athlete stats</button>
       </nav>
@@ -61,6 +62,12 @@
         <div class="data-page-heading"><div><p class="eyebrow">EVERY SESSION, TOGETHER</p><h2>Workout log</h2><p>Search by exercise and open any movement to see its history.</p></div><label class="log-search"><span>⌕</span><input id="logSearch" type="search" placeholder="Search workouts…" autocomplete="off"><kbd>/</kbd></label></div>
         <div class="log-table-wrap"><table class="log-table"><thead><tr><th>DATE</th><th>WORKOUT</th><th>WEIGHT</th><th>SETS × REPS</th><th>VOLUME</th></tr></thead><tbody id="logRows"></tbody></table><div class="log-empty" id="logEmpty" hidden>No workouts match that search.</div></div>
         <div class="log-count" id="logCount"></div>
+      </section>
+
+      <section class="page-view data-page annual-page" id="annualView" data-page-view="annual" hidden>
+        <div class="data-page-heading annual-heading"><div><p class="eyebrow">A YEAR OF SHOWING UP</p><h2>Annual overview</h2><p>Every workout day, marked in cardinal.</p></div><div class="annual-year-controls"><button class="month-arrow" id="prevYear" type="button" aria-label="Previous year"><svg viewBox="0 0 20 20"><path d="m12.5 4.5-5 5.5 5 5.5"/></svg></button><strong id="annualYearTitle"></strong><button class="month-arrow" id="nextYear" type="button" aria-label="Next year"><svg viewBox="0 0 20 20"><path d="m7.5 4.5 5 5.5-5 5.5"/></svg></button><button class="today-button" id="currentYear" type="button">This year</button></div></div>
+        <div class="annual-legend"><i></i><span>Workout logged</span><span class="calendar-hint">Select any date to open it on the calendar</span></div>
+        <div class="annual-months" id="annualCalendar" aria-label="Yearly workout calendar"></div>
       </section>
 
       <section class="page-view data-page" id="statsView" data-page-view="stats" hidden>

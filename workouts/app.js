@@ -6,6 +6,7 @@
   const $ = (id) => document.getElementById(id);
   const today = new Date(); today.setHours(0,0,0,0);
   let shownMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+  let annualYear = today.getFullYear();
   let selectedDate = '';
   let activeLift = '';
   let activeView = 'calendar';
@@ -183,6 +184,7 @@
     renderCalendar();
     if(selectedDate)renderDay(selectedDate);
     if(activeView==='log')renderLog();
+    if(activeView==='annual')renderAnnualOverview();
     if(activeView==='stats')renderProfileStats();
   }
   async function refreshFromSheet() {
@@ -241,13 +243,39 @@
     $('maxLiftsGrid').innerHTML=targets.map(([label,match])=>{const best=entries.filter(row=>row.weight!==null&&match(row.liftKey)).reduce((max,row)=>Math.max(max,row.weight),0);return `<div class="max-lift"><span>${label}</span><strong>${best?`${compact(best)} lb`:'—'}</strong></div>`}).join('');
   }
 
+  function renderAnnualOverview() {
+    $('annualYearTitle').textContent=annualYear;
+    $('annualCalendar').innerHTML=MONTHS.map((monthName,monthIndex)=>{
+      const firstDay=new Date(annualYear,monthIndex,1);
+      const offset=(firstDay.getDay()+6)%7;
+      const dayCount=new Date(annualYear,monthIndex+1,0).getDate();
+      const cellCount=Math.ceil((offset+dayCount)/7)*7;
+      const monthDays=[];
+      let workoutDays=0;
+      for(let cell=0;cell<cellCount;cell++){
+        const day=cell-offset+1;
+        if(day<1||day>dayCount){monthDays.push('<span class="annual-day empty" aria-hidden="true"></span>');continue;}
+        const dateKey=`${annualYear}-${String(monthIndex+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+        const date=new Date(annualYear,monthIndex,day);
+        const count=(byDate.get(dateKey)||[]).length;
+        if(count)workoutDays++;
+        const classes=['annual-day',count?'has-workout':'',selectedDate===dateKey?'selected':''].filter(Boolean).join(' ');
+        const label=`${longDate(date)}${count?`, ${count} ${count===1?'workout entry':'workout entries'}`:''}`;
+        monthDays.push(`<button class="${classes}" type="button" data-annual-date="${dateKey}" aria-label="${escapeHTML(label)}" title="${escapeHTML(label)}">${day}</button>`);
+      }
+      const weekdays=['M','T','W','T','F','S','S'].map((day)=>`<span>${day}</span>`).join('');
+      return `<article class="annual-month"><div class="annual-month-label"><h3>${monthName}</h3><span>${workoutDays} ${workoutDays===1?'day':'days'}</span></div><div class="annual-month-calendar"><div class="annual-weekdays" aria-hidden="true">${weekdays}</div><div class="annual-days">${monthDays.join('')}</div></div></article>`;
+    }).join('');
+  }
+
   function setView(view) {
-    if(!['calendar','log','stats'].includes(view))return;
+    if(!['calendar','annual','log','stats'].includes(view))return;
     activeView=view;
     document.querySelectorAll('[data-page-view]').forEach(page=>{page.hidden=page.dataset.pageView!==view;});
     $('calendarOverview').hidden=view!=='calendar';
     document.querySelectorAll('[data-view]').forEach(tab=>tab.classList.toggle('active',tab.dataset.view===view));
     if(view==='log')renderLog();
+    if(view==='annual')renderAnnualOverview();
     if(view==='stats')renderProfileStats();
   }
 
@@ -316,6 +344,7 @@
     renderCalendar();
     if (selectedDate) renderDay(selectedDate);
     if(activeView==='log')renderLog();
+    if(activeView==='annual')renderAnnualOverview();
     if(activeView==='stats')renderProfileStats();
   }
 
@@ -446,6 +475,10 @@
   $('prevMonth').addEventListener('click',()=>{shownMonth=new Date(shownMonth.getFullYear(),shownMonth.getMonth()-1,1);renderCalendar()});
   $('nextMonth').addEventListener('click',()=>{shownMonth=new Date(shownMonth.getFullYear(),shownMonth.getMonth()+1,1);renderCalendar()});
   $('todayButton').addEventListener('click',()=>{shownMonth=new Date(today.getFullYear(),today.getMonth(),1);renderCalendar();renderDay(keyFor(today))});
+  $('prevYear').addEventListener('click',()=>{annualYear--;renderAnnualOverview()});
+  $('nextYear').addEventListener('click',()=>{annualYear++;renderAnnualOverview()});
+  $('currentYear').addEventListener('click',()=>{annualYear=today.getFullYear();renderAnnualOverview()});
+  $('annualCalendar').addEventListener('click',(event)=>{const button=event.target.closest('[data-annual-date]');if(!button)return;const dateKey=button.dataset.annualDate;const [year,month]=dateKey.split('-').map(Number);shownMonth=new Date(year,month-1,1);setView('calendar');renderDay(dateKey)});
   $('calendarGrid').addEventListener('click',(event)=>{const button=event.target.closest('[data-date]');if(!button)return;const [year,month]=button.dataset.date.split('-').map(Number);if(year!==shownMonth.getFullYear()||month-1!==shownMonth.getMonth()){shownMonth=new Date(year,month-1,1)}renderDay(button.dataset.date)});
   $('dayContent').addEventListener('click',(event)=>{const button=event.target.closest('[data-lift]');if(button)openLift(button.dataset.lift)});
   $('profileButton').addEventListener('click',()=>{const open=$('profileMenu').hidden;$('profileMenu').hidden=!open;$('profileButton').setAttribute('aria-expanded',String(open));});
